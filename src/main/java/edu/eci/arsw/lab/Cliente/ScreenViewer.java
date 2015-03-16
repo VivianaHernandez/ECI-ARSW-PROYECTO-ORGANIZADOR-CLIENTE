@@ -31,6 +31,9 @@ public class ScreenViewer {
     static ScreenCaptureStub screenCaptureStub;
     static Documento d;
 
+    
+    
+    
     public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, ScreenCaptureException, RemoteException, AccessException, NotBoundException {
         /*COMENTARIO*/
         int puerto = 1022;
