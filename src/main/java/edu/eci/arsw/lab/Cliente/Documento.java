@@ -23,7 +23,6 @@ public class Documento{
          
     }
     
-    
     public void actualizar(String texto)
     {
         System.out.println("LlegoTexto: " + texto);
