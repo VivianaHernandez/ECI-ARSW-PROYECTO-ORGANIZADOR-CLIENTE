@@ -43,10 +43,7 @@ public class Documento{
         jf.getContentPane().add(activateButton, java.awt.BorderLayout.NORTH);
         jf.setVisible(true);
         
-        while(!stopandexit)
-        {
         
-        }
         
         
 

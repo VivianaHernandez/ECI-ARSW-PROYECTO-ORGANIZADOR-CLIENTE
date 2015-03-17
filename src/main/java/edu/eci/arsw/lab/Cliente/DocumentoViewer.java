@@ -36,8 +36,6 @@ public class DocumentoViewer {
     
     public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, DocumentoCaptureException, RemoteException, AccessException, NotBoundException {
         /*COMENTARIO*/
-        int puerto = 1022;
-        String ip = "192.168.0.2";
         
         initComponents();
         jf.setSize(800,600);
