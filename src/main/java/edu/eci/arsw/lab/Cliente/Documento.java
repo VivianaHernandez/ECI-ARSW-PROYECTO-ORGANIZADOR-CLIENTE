@@ -19,7 +19,7 @@ public class Documento{
     public Documento() {
          initComponents();
          jf.setSize(800,600);
-          jf.setVisible(true); 
+         jf.setVisible(true); 
          
     }
     

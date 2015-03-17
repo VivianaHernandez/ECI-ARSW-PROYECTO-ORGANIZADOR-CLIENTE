@@ -15,6 +15,7 @@ import java.rmi.RemoteException;
 public interface DocumentoCaptureStub 
 {
   public String getTexto() throws DocumentoCaptureException;
+  public String setTexto(String texto) throws DocumentoCaptureException;
   
     
   

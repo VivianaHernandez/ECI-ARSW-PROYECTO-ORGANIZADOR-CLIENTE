@@ -19,6 +19,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.CaretEvent;
@@ -30,6 +31,7 @@ public class DocumentoViewer {
 
     static DocumentoCaptureStub documentoCaptureStub;
     static Documento d;
+    static ArrayList<String> palabras=new ArrayList<String>();
 
     
     /*Viviana*/
@@ -69,6 +71,7 @@ public class DocumentoViewer {
         while(!stopandexit)
         {
         texto=documentoCaptureStub.getTexto();
+        documentoCaptureStub.setTexto(textArea.getText());
        setTexto(texto);
         jf.repaint();
         }
@@ -95,7 +98,21 @@ public class DocumentoViewer {
     
     public static void setTexto(String texto)
     {
-    textArea.setText(texto);
+    String pal=textArea.getText();
+    
+   System.out.println("palabras "+pal);
+     
+      if(pal.lastIndexOf(" ")==1)
+      {
+          System.out.println("encontro espacio+++++++++++++++++++++ "+pal);
+      }
+     
+    
+    
+        textArea.setText(texto);
+    
+    //textArea.append(textArea.getText()+texto);
+    //textArea.insert(texto,1);
     }
     
     
