@@ -51,7 +51,8 @@ public class DocumentoViewer {
         actualizarDocumento(texto); 
         
         activateButton=new JButton("Stop and exit");
-         activateButton.addActionListener(
+        activateButton.setPreferredSize(new Dimension(40,40)); 
+        activateButton.addActionListener(
            new ActionListener(){
             
             public void actionPerformed(ActionEvent e)
@@ -61,7 +62,7 @@ public class DocumentoViewer {
         }
          );
         
-        jf.getContentPane().add(activateButton, java.awt.BorderLayout.NORTH);
+        jf.getContentPane().add(activateButton);
         jf.setVisible(true);
       
         
