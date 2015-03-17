@@ -12,9 +12,9 @@ import java.rmi.RemoteException;
  *
  * @author viviana
  */
-public interface ScreenCaptureStub 
+public interface DocumentoCaptureStub 
 {
-  public String getScreenShot() throws ScreenCaptureException;
+  public String getTexto() throws DocumentoCaptureException;
   
     
   
