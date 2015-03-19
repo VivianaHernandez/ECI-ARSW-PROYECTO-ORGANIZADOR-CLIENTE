@@ -1,5 +1,6 @@
 package edu.eci.arsw.lab.Cliente;
 
+import edu.eci.arsw.arsw.utils.Palabras;
 import edu.eci.arsw.utils.NetUtils;
 import javax.imageio.ImageIO;
 
@@ -14,16 +15,21 @@ import java.awt.*;
 import javax.swing.*;
 
 import java.awt.Graphics;
+import java.io.ObjectOutputStream;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
+import javax.swing.text.BadLocationException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -31,27 +37,106 @@ public class DocumentoViewer {
 
     static DocumentoCaptureStub documentoCaptureStub;
     static Documento d;
-    static ArrayList<String> palabras=new ArrayList<String>();
-
-    
-    /*Viviana*/
+    static Palabras palabras;
+    static String text;
+    static String texto;
+    static int cont=0;
+    static int espacio=-1;
     
     public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, DocumentoCaptureException, RemoteException, AccessException, NotBoundException {
         /*COMENTARIO*/
         
         initComponents();
         jf.setSize(800,600);
-         
+        jf.setTitle("Aplicacion del cliente");
+       
+        jf.setVisible(true);
+      
         
         System.out.println("IP address Cliente:" + NetUtils.getIPAddress());
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-        DocumentoCaptureStub documentoCaptureStub = (DocumentoCaptureStub)ac.getBean("documentoCaptureStub");
+        final DocumentoCaptureStub documentoCaptureStub = (DocumentoCaptureStub)ac.getBean("documentoCaptureStub");
         
-        String texto = documentoCaptureStub.getTexto();
-        System.out.println("Texto......."+texto);
+        //texto = documentoCaptureStub.getTexto();
+      
         
         actualizarDocumento(texto); 
         
+      
+        
+        textArea.addCaretListener(new CaretListener(){
+        
+                @Override
+                public void caretUpdate(CaretEvent e){
+               
+               int pos=e.getDot();
+               
+               text=textArea.getText();
+               //int lastspace=text.lastIndexOf(" ", pos);
+               int longi=1;
+               
+               String nuevo="";
+                    try {
+                        
+                        nuevo = textArea.getText(pos-1,longi);
+                        System.out.println("text "+nuevo);
+                         System.out.println("posicion+ "+pos);
+                        
+                        
+                    } catch (BadLocationException ex) {
+                        Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+               
+             
+               /*if(lastspace!=espacio){
+                   
+                       band=true;
+                       nuevo=text.substring(cont,pos);
+                       cont=lastspace;
+                       
+                       Palabras palabra=new Palabras(cont,nuevo);
+                       
+                 */      
+                       try {
+                           
+                        texto=documentoCaptureStub.getTexto();
+                    } catch (DocumentoCaptureException ex) {
+                        Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                       
+                        documentoCaptureStub.setTexto(pos,nuevo);
+                    } catch (DocumentoCaptureException ex) {
+                        Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    setTexto(texto);
+                    jf.repaint();
+                       
+                       
+                   
+               
+               
+             
+           
+                    
+                
+                }
+                
+                
+                
+                
+        });
+        /*
+        System.out.println("Alli........");
+         System.out.println("palabras "+palabras.size());
+        Iterator it = palabras.keySet().iterator();
+                    while (it.hasNext()) {
+                        Integer key = (Integer) it.next();
+                        System.out.println("Clave: " + key + " -> Valor: " + palabras.get(key));
+                    }
+                
+                
+                
         activateButton=new JButton("Stop and exit");
         activateButton.setPreferredSize(new Dimension(40,40)); 
         activateButton.addActionListener(
@@ -64,18 +149,16 @@ public class DocumentoViewer {
         }
          );
         
-        jf.getContentPane().add(activateButton);
-        jf.setVisible(true);
-      
+        
         
         while(!stopandexit)
         {
         texto=documentoCaptureStub.getTexto();
         documentoCaptureStub.setTexto(textArea.getText());
-       setTexto(texto);
+        setTexto(texto);
         jf.repaint();
         }
-        
+        */
     }
     
    
@@ -100,16 +183,11 @@ public class DocumentoViewer {
     {
     String pal=textArea.getText();
     
-   System.out.println("palabras "+pal);
+   //System.out.println("palabras "+pal);
      
-      if(pal.lastIndexOf(" ")==1)
-      {
-          System.out.println("encontro espacio+++++++++++++++++++++ "+pal);
-      }
+      
      
-    
-    
-        textArea.setText(texto);
+        //textArea.setText(texto);
     
     //textArea.append(textArea.getText()+texto);
     //textArea.insert(texto,1);
@@ -200,7 +278,7 @@ public class DocumentoViewer {
         jf.pack();
     }// </editor-fold>  
     
-    private static String texto;
+   
     private static boolean stopandexit=false;
     private static javax.swing.JFrame jf;
     private static javax.swing.JButton activateButton;

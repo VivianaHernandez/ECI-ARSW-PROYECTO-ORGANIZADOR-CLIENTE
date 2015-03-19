@@ -8,7 +8,7 @@
   
       
     <bean id="documentoCaptureStub" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
-        <property name="serviceUrl" value="rmi://10.2.67.42:3010/documentoCaptureStub"/>
+        <property name="serviceUrl" value="rmi://172.16.1.80:3010/documentoCaptureStub"/>
         <property name="serviceInterface" value="edu.eci.arsw.lab.Cliente.DocumentoCaptureStub"/>
     </bean>
     
