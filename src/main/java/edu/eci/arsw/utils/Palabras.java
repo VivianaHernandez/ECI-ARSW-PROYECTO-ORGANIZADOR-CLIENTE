@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.arsw.utils;
+package edu.eci.arsw.utils;
 
 import java.io.Serializable;
 

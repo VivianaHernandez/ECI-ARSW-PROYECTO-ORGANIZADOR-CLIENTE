@@ -1,7 +1,8 @@
 package edu.eci.arsw.lab.Cliente;
 
-import edu.eci.arsw.arsw.utils.Palabras;
+
 import edu.eci.arsw.utils.NetUtils;
+import edu.eci.arsw.utils.Palabras;
 import javax.imageio.ImageIO;
 
 import java.io.ByteArrayInputStream;
@@ -42,6 +43,8 @@ public class DocumentoViewer {
     static String texto;
     static int cont=0;
     static int espacio=-1;
+    static String nuevo="";
+    static int pos;
     
     public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, DocumentoCaptureException, RemoteException, AccessException, NotBoundException {
         /*COMENTARIO*/
@@ -60,7 +63,7 @@ public class DocumentoViewer {
         //texto = documentoCaptureStub.getTexto();
       
         
-        actualizarDocumento(texto); 
+        
         
       
         
@@ -75,7 +78,7 @@ public class DocumentoViewer {
                //int lastspace=text.lastIndexOf(" ", pos);
                int longi=1;
                
-               String nuevo="";
+               
                     try {
                         
                         nuevo = textArea.getText(pos-1,longi);
@@ -96,22 +99,25 @@ public class DocumentoViewer {
                        
                        Palabras palabra=new Palabras(cont,nuevo);
                        
-                 */      
-                       try {
-                           
-                        texto=documentoCaptureStub.getTexto();
-                    } catch (DocumentoCaptureException ex) {
-                        Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                 */   
                     try {
                        
                         documentoCaptureStub.setTexto(pos,nuevo);
                     } catch (DocumentoCaptureException ex) {
                         Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    setTexto(texto);
-                    jf.repaint();
-                       
+                     
+                      try {
+                           
+                        palabras=documentoCaptureStub.getTexto();
+                        setTexto(palabras);
+                        jf.repaint();
+                    } catch (DocumentoCaptureException ex) {
+                        Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
+                     
                        
                    
                
@@ -126,47 +132,16 @@ public class DocumentoViewer {
                 
                 
         });
-        /*
-        System.out.println("Alli........");
-         System.out.println("palabras "+palabras.size());
-        Iterator it = palabras.keySet().iterator();
-                    while (it.hasNext()) {
-                        Integer key = (Integer) it.next();
-                        System.out.println("Clave: " + key + " -> Valor: " + palabras.get(key));
-                    }
-                
-                
-                
-        activateButton=new JButton("Stop and exit");
-        activateButton.setPreferredSize(new Dimension(40,40)); 
-        activateButton.addActionListener(
-           new ActionListener(){
-            
-            public void actionPerformed(ActionEvent e)
-            {
-            stopandexit=true;
-            }
-        }
-         );
         
         
+                
         
-        while(!stopandexit)
-        {
-        texto=documentoCaptureStub.getTexto();
-        documentoCaptureStub.setTexto(textArea.getText());
-        setTexto(texto);
-        jf.repaint();
-        }
-        */
+        
     }
     
    
     
-    public static void actualizarDocumento(String texto)
-    {
-     setTexto(texto);
-    }
+   
     
     public static DocumentoCaptureStub getProxy(String ip, int puerto, String nombreObjeto) throws AccessException, RemoteException, NotBoundException {
 
@@ -179,15 +154,17 @@ public class DocumentoViewer {
         this.documentoCaptureStub = documentoCaptureStub;
     }
     
-    public static void setTexto(String texto)
+    public static void setTexto(Palabras texto)
     {
     String pal=textArea.getText();
     
+    
+    //textArea.removeAll();
+    textArea.removeAll();
+    //textArea.insert(texto, pos);
+    
    //System.out.println("palabras "+pal);
      
-      
-     
-        //textArea.setText(texto);
     
     //textArea.append(textArea.getText()+texto);
     //textArea.insert(texto,1);
