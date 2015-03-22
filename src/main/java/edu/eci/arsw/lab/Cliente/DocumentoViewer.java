@@ -38,8 +38,9 @@ public class DocumentoViewer {
 
     static DocumentoCaptureStub documentoCaptureStub;
     static Documento d;
-    static Palabras palabras;
+    static String palabras;
     static String text;
+    static boolean b=true;
     static String texto;
     static int cont=0;
     static int espacio=-1;
@@ -50,7 +51,7 @@ public class DocumentoViewer {
         /*COMENTARIO*/
         
         initComponents();
-        jf.setSize(800,600);
+        jf.setSize(600,400);
         jf.setTitle("Aplicacion del cliente");
        
         jf.setVisible(true);
@@ -62,7 +63,7 @@ public class DocumentoViewer {
         
         //texto = documentoCaptureStub.getTexto();
       
-        
+       
         
         
       
@@ -77,13 +78,12 @@ public class DocumentoViewer {
                text=textArea.getText();
                //int lastspace=text.lastIndexOf(" ", pos);
                int longi=1;
-               
+                    
                
                     try {
                         
                         nuevo = textArea.getText(pos-1,longi);
-                        System.out.println("text "+nuevo);
-                         System.out.println("posicion+ "+pos);
+                        
                         
                         
                     } catch (BadLocationException ex) {
@@ -103,40 +103,54 @@ public class DocumentoViewer {
                     try {
                        
                         documentoCaptureStub.setTexto(pos,nuevo);
-                    } catch (DocumentoCaptureException ex) {
-                        Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                     
-                      try {
-                           
-                        palabras=documentoCaptureStub.getTexto();
+                       
+                                     palabras=documentoCaptureStub.getTexto();
+                        //System.out.println("text "+palabras);
+                        //actualizarTexto(pos,nuevo);
                         setTexto(palabras);
                         jf.repaint();
+        
+                       
+                       
                     } catch (DocumentoCaptureException ex) {
                         Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
-                    
-                     
-                       
-                   
-               
-               
-             
-           
-                    
                 
                 }
-                
-                
-                
-                
+    
         });
         
+        b=documentoCaptureStub.notificarCambio();
         
+       /* activateButton=new JButton("Stop and exit");
+        activateButton.addActionListener(
+                new ActionListener(){
                 
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                stopandexit=true;
+                } 
+                });
+        jf.getContentPane().add(activateButton);
+        jf.setVisible(true);
+        */
+        try {
+                      
+            while(true){
+            palabras=documentoCaptureStub.getTexto();
+                        //System.out.println("text "+palabras);
+                        //actualizarTexto(pos,nuevo);
+                        setTexto(palabras);
+                        jf.repaint();
+            }
+                    } catch (DocumentoCaptureException ex) {
+                        Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
         
-        
+      
+         
+         
     }
     
    
@@ -154,13 +168,29 @@ public class DocumentoViewer {
         this.documentoCaptureStub = documentoCaptureStub;
     }
     
-    public static void setTexto(Palabras texto)
+    public static void setTexto(String texto)
     {
-    String pal=textArea.getText();
+     
+     String s=texto;
+     System.out.print("\nTexto cliente: "+s);
+     char w;
+    
+    /* for(int i=1;i<s.length();i++)
+     {
+        w=s.charAt(i);
+       String ww=w+"";
+      textArea.insert(ww, i);
+      System.out.print("\n\nPalabra: "+ww);
+      System.out.print("\nPosicion: "+i);
+     }
+            */
+            
+     
+   
     
     
     //textArea.removeAll();
-    textArea.removeAll();
+   
     //textArea.insert(texto, pos);
     
    //System.out.println("palabras "+pal);
@@ -168,6 +198,8 @@ public class DocumentoViewer {
     
     //textArea.append(textArea.getText()+texto);
     //textArea.insert(texto,1);
+     
+     textArea.setText(texto);
     }
     
     
