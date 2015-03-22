@@ -1,31 +1,12 @@
 package edu.eci.arsw.lab.Cliente;
 
-
-import edu.eci.arsw.utils.NetUtils;
-import edu.eci.arsw.utils.Palabras;
-import javax.imageio.ImageIO;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.awt.*;
-
 import javax.swing.*;
-
-import java.awt.Graphics;
-import java.io.ObjectOutputStream;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.CaretEvent;
@@ -37,125 +18,53 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class DocumentoViewer {
 
     static DocumentoCaptureStub documentoCaptureStub;
-    static Documento d;
     static String palabras;
-    static String text;
     static boolean b=true;
-    static String texto;
-    static int cont=0;
-    static int espacio=-1;
+    static String text;
     static String nuevo="";
     static int pos;
     
-    public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, DocumentoCaptureException, RemoteException, AccessException, NotBoundException {
-        /*COMENTARIO*/
-        
+    public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, DocumentoCaptureException, RemoteException, AccessException, NotBoundException, BadLocationException {
+      
         initComponents();
         jf.setSize(600,400);
         jf.setTitle("Aplicacion del cliente");
-       
         jf.setVisible(true);
       
-        
-        System.out.println("IP address Cliente:" + NetUtils.getIPAddress());
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
         final DocumentoCaptureStub documentoCaptureStub = (DocumentoCaptureStub)ac.getBean("documentoCaptureStub");
-        
-        //texto = documentoCaptureStub.getTexto();
-      
-       
-        
-        
-      
         
         textArea.addCaretListener(new CaretListener(){
         
                 @Override
                 public void caretUpdate(CaretEvent e){
                
-               int pos=e.getDot();
-               
+               int pos=e.getDot(),longi=1;
                text=textArea.getText();
-               //int lastspace=text.lastIndexOf(" ", pos);
-               int longi=1;
-                    
-               
+              
                     try {
-                        
                         nuevo = textArea.getText(pos-1,longi);
-                        
-                        
-                        
                     } catch (BadLocationException ex) {
                         Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-               
-             
-               /*if(lastspace!=espacio){
-                   
-                       band=true;
-                       nuevo=text.substring(cont,pos);
-                       cont=lastspace;
-                       
-                       Palabras palabra=new Palabras(cont,nuevo);
-                       
-                 */   
+                    } 
                     try {
-                       
                         documentoCaptureStub.setTexto(pos,nuevo);
-                       
-                                     palabras=documentoCaptureStub.getTexto();
-                        //System.out.println("text "+palabras);
-                        //actualizarTexto(pos,nuevo);
-                        setTexto(palabras);
-                        jf.repaint();
-        
-                       
-                       
                     } catch (DocumentoCaptureException ex) {
                         Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                
                 }
-    
         });
-        
-        b=documentoCaptureStub.notificarCambio();
-        
-       /* activateButton=new JButton("Stop and exit");
-        activateButton.addActionListener(
-                new ActionListener(){
-                
-                @Override
-                public void actionPerformed(ActionEvent e)
-                {
-                stopandexit=true;
-                } 
-                });
-        jf.getContentPane().add(activateButton);
-        jf.setVisible(true);
-        */
         try {
                       
-            while(true){
+            while(b==true){
             palabras=documentoCaptureStub.getTexto();
-                        //System.out.println("text "+palabras);
-                        //actualizarTexto(pos,nuevo);
                         setTexto(palabras);
                         jf.repaint();
             }
                     } catch (DocumentoCaptureException ex) {
                         Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
                     }
-        
-      
-         
-         
     }
-    
-   
-    
-   
     
     public static DocumentoCaptureStub getProxy(String ip, int puerto, String nombreObjeto) throws AccessException, RemoteException, NotBoundException {
 
@@ -168,62 +77,41 @@ public class DocumentoViewer {
         this.documentoCaptureStub = documentoCaptureStub;
     }
     
-    public static void setTexto(String texto)
+    public static void setTexto(String texto) throws BadLocationException
     {
-     
      String s=texto;
-     System.out.print("\nTexto cliente: "+s);
+     int uu=1,i;
      char w;
-    
-    /* for(int i=1;i<s.length();i++)
+  
+        for (i = 0; i < s.length(); i++) {
+            w = s.charAt(i);
+            String ww = w + "";
+            String a = textArea.getText(i, uu);
+
+            if (!ww.equals(a)) {
+                textArea.insert(ww, i);
+            }
+        }
+    for(i=s.length();i<100;i++)
      {
-        w=s.charAt(i);
-       String ww=w+"";
-      textArea.insert(ww, i);
-      System.out.print("\n\nPalabra: "+ww);
-      System.out.print("\nPosicion: "+i);
+     textArea.insert(" ", i);
      }
-            */
-            
-     
-   
-    
-    
-    //textArea.removeAll();
-   
-    //textArea.insert(texto, pos);
-    
-   //System.out.println("palabras "+pal);
-     
-    
-    //textArea.append(textArea.getText()+texto);
-    //textArea.insert(texto,1);
-     
-     textArea.setText(texto);
     }
-    
-    
  
     private static void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                             
-           
-      
           try {
             //mec.Guardar(evt, textArea, defaultPath);
         } catch (Exception ex) {
-            Logger.getLogger(Documento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
     }                                            
 
-    private static void loadMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        
+    private static void loadMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                              
         try {
             //mec.cargar(textArea, defaultPath);
         } catch (Exception ex) {
-            Logger.getLogger(Documento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     } 
     
     public static void initComponents() {
@@ -249,7 +137,9 @@ public class DocumentoViewer {
 
         jf.getContentPane().add(textjsp, java.awt.BorderLayout.CENTER);
 
-       
+        for(int i=0;i<100;i++){
+       textArea.insert(" ",i);}
+        
                 
         jMenu1.setText("File");
 
@@ -285,9 +175,8 @@ public class DocumentoViewer {
         jf.setJMenuBar(jMenuBar1);
 
         jf.pack();
-    }// </editor-fold>  
+    }
     
-   
     private static boolean stopandexit=false;
     private static javax.swing.JFrame jf;
     private static javax.swing.JButton activateButton;

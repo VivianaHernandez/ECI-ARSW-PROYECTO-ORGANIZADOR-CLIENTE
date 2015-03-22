@@ -5,23 +5,8 @@
  */
 package edu.eci.arsw.lab.Cliente;
 
-import edu.eci.arsw.utils.Palabras;
-import java.awt.image.BufferedImage;
-import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-
-/**
- *
- * @author viviana
- */
 public interface DocumentoCaptureStub 
 {
   public String getTexto() throws DocumentoCaptureException;
-  public boolean notificarCambio() throws DocumentoCaptureException;
-  public void setTexto(int Posicion,String texto) throws DocumentoCaptureException;
-  
-    
-  
-    
+  public void setTexto(int Posicion,String texto) throws DocumentoCaptureException;   
 }
