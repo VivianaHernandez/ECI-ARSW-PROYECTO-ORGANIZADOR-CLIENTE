@@ -18,7 +18,7 @@ public class DocumentoViewer {
     static TColaborativa tc;
    
             
-    public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, CalendarioCaptureException, RemoteException, AccessException, NotBoundException, BadLocationException {
+   /* public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, CalendarioCaptureException, RemoteException, AccessException, NotBoundException, BadLocationException {
       
        // d=new Documento(calendarioCaptureStub);
         
@@ -29,7 +29,7 @@ public class DocumentoViewer {
         System.out.println("Fecha: "+tc.getFecha().getDia());
         System.out.println("Descripcion: "+tc.getDesripcion());
         
-    }
+    }*/
     
     public static CalendarioCaptureStub getProxy(String ip, int puerto, String nombreObjeto) throws AccessException, RemoteException, NotBoundException {
 
