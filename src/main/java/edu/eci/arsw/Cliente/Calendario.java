@@ -7,6 +7,7 @@ package edu.eci.arsw.Cliente;
 
 import edu.eci.arsw.CalendarioComun.Fecha;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
+import edu.eci.arsw.CalendarioComun.TInformativa;
 import java.awt.Color;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
@@ -26,6 +27,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Calendario extends JFrame {
      static JLabel jLabel11;
      static Calendario calendario=null;
+     private static  TColaborativa colab=null;
+     private static  TInformativa infor=null;
+    
+
+    public static void devolverInfo(TColaborativa c) {
+        
+        this.colab=c;
+    }
+
+    public static void devolverInfo(TInformativa i) {
+        this.infor=i;
+    }
      private Fecha cl;
      static CalendarioCaptureStub calendarioCaptureStub;
      static Documento d;
@@ -128,6 +141,7 @@ public class Calendario extends JFrame {
         calendario.setVisible(false);
         Informacion vp = new Informacion(cl);
         vp.info();
+        System.out.println("VOLVIO A CALENDARIO");
     }//GEN-LAST:event_seleccionarActionPerformed
     
     public static void main(String args[]) throws CalendarioCaptureException {

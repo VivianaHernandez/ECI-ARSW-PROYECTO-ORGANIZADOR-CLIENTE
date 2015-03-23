@@ -17,6 +17,7 @@ public class Informacion extends javax.swing.JFrame {
     private Fecha fecha;
     private String nombre;
     private String descripcion;
+    static TInformativa infor;
     /**
      * Creates new form Informacion
      */
@@ -175,11 +176,14 @@ public class Informacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void informativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informativaActionPerformed
-        TInformativa infor=new TInformativa(fecha, nombre, descripcion);
+         infor=new TInformativa(fecha, nombre, descripcion);
+        Calendario.devolverInfo(infor);
     }//GEN-LAST:event_informativaActionPerformed
 
     private void colaborativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colaborativaActionPerformed
         TColaborativa colab=new TColaborativa(fecha, nombre, descripcion);
+        Calendario.devolverInfo(colab);
+        
     }//GEN-LAST:event_colaborativaActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
