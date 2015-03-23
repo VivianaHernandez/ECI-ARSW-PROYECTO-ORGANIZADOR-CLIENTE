@@ -21,6 +21,9 @@ public class TColaborativa implements Serializable{
         this.descripcion=descripcion;
         
     }
+    public TColaborativa() {
+    }
+    
 
     public Fecha getFecha() {
         return fecha;

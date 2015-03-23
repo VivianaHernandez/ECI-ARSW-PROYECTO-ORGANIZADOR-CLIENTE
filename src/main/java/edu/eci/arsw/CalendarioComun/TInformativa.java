@@ -20,6 +20,9 @@ public class TInformativa implements Serializable{
         this.descripcion=descripcion;
     }
     
+    public TInformativa() {
+    }
+    
      public Fecha getFecha() {
         return fecha;
     }

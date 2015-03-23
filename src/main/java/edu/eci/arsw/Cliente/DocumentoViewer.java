@@ -22,7 +22,7 @@ public class DocumentoViewer {
       
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
         final CalendarioCaptureStub calendarioCaptureStub = (CalendarioCaptureStub)ac.getBean("calendarioCaptureStub");
-        d=new Documento(calendarioCaptureStub);
+       // d=new Documento(calendarioCaptureStub);
         
         tc=calendarioCaptureStub.getTareaColaborativa();
         
@@ -30,7 +30,7 @@ public class DocumentoViewer {
         
         System.out.println("Nombre: "+tc.getNombre());
         System.out.println("Fecha: "+tc.getFecha().getDia());
-        System.out.println("descripcion: "+tc.getDescripcion());
+        System.out.println("Descripcion: "+tc.getDescripcion());
         
     }
     

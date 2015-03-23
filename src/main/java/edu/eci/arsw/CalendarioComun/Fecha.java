@@ -5,11 +5,9 @@
  */
 package edu.eci.arsw.CalendarioComun;
 
-/**
- *
- * @author viviana
- */
-public class Fecha {
+import java.io.Serializable;
+
+public class Fecha implements Serializable {
     
     private int dia;
     private int mes;
