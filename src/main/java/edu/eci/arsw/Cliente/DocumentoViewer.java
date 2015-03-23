@@ -27,7 +27,6 @@ public class DocumentoViewer {
         tc=calendarioCaptureStub.getTareaColaborativa();
         
         System.out.println("*******************************************");
-        
         System.out.println("Nombre: "+tc.getNombre());
         System.out.println("Fecha: "+tc.getFecha().getDia());
         System.out.println("Descripcion: "+tc.getDescripcion());

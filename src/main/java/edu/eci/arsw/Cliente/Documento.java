@@ -22,7 +22,6 @@ public class Documento {
     
     public Documento(final CalendarioCaptureStub calendarioCaptureStub) throws BadLocationException
     {
-    
          initComponents();
         jf.setSize(600,400);
         jf.setTitle("Aplicacion del cliente");
