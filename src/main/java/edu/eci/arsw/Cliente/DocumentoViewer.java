@@ -20,8 +20,6 @@ public class DocumentoViewer {
             
     public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, CalendarioCaptureException, RemoteException, AccessException, NotBoundException, BadLocationException {
       
-        ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-        final CalendarioCaptureStub calendarioCaptureStub = (CalendarioCaptureStub)ac.getBean("calendarioCaptureStub");
        // d=new Documento(calendarioCaptureStub);
         
         tc=calendarioCaptureStub.getTareaColaborativa();

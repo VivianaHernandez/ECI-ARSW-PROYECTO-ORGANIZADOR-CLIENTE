@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -152,9 +154,9 @@ public class Calendario extends JFrame {
         //</editor-fold>
         
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
+        
+        ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
+        final CalendarioCaptureStub calendarioCaptureStub = (CalendarioCaptureStub)ac.getBean("calendarioCaptureStub");
                 calendario=new Calendario();
                 
                 calendario.setVisible(true);
@@ -162,8 +164,6 @@ public class Calendario extends JFrame {
                 calendario.setSize(415, 415);
                 //jLabel1.setBackground(Color.red);
                 calendario.setResizable(false);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
