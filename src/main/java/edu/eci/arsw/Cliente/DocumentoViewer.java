@@ -29,7 +29,7 @@ public class DocumentoViewer {
         System.out.println("*******************************************");
         System.out.println("Nombre: "+tc.getNombre());
         System.out.println("Fecha: "+tc.getFecha().getDia());
-        System.out.println("Descripcion: "+tc.getDescripcion());
+        System.out.println("Descripcion: "+tc.getDesripcion());
         
     }
     

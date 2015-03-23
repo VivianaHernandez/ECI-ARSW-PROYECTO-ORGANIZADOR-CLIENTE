@@ -3,51 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package  edu.eci.arsw.CalendarioComun;
+package edu.eci.arsw.CalendarioComun;
 
 import java.io.Serializable;
-import java.util.Date;
 
+/**
+ *
+ * @author Torres
+ */
 public class TColaborativa implements Serializable{
-
-    private Fecha fecha;
     private String nombre;
-    private String descripcion;
+    private Fecha fecha;
+    private String desripcion;
 
-    public TColaborativa(Fecha fechaTarea,String nombre,String descripcion) {
-        
+    public TColaborativa(Fecha fecha, String nombre, String descripcion){
         this.fecha=fecha;
-        this.nombre=nombre;
-        this.descripcion=descripcion;
-        
-    }
-    public TColaborativa() {
     }
     
-
-    public Fecha getFecha() {
-        return fecha;
-    }
-
+    
     public String getNombre() {
         return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-    
-     public void setFecha(Fecha fecha) {
-        this.fecha = fecha;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public Fecha getFecha() {
+        return fecha;
     }
-    
-   
+
+    public void setFecha(Fecha fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getDesripcion() {
+        return desripcion;
+    }
+
+    public void setDesripcion(String desripcion) {
+        this.desripcion = desripcion;
+    }
 }

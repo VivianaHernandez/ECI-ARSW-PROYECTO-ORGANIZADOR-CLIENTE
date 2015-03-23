@@ -3,48 +3,44 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package  edu.eci.arsw.CalendarioComun;
+package edu.eci.arsw.CalendarioComun;
 
 import java.io.Serializable;
-import java.util.Date;
 
+/**
+ *
+ * @author Torres
+ */
 public class TInformativa implements Serializable{
-
-    private Fecha fecha;
     private String nombre;
-    private String descripcion;
-    
-    public TInformativa(String nombre, Date fechaTarea, String descripcion) {
-        this.fecha=fecha;
-        this.nombre=nombre;
-        this.descripcion=descripcion;
-    }
-    
-    public TInformativa() {
-    }
-    
-     public Fecha getFecha() {
-        return fecha;
-    }
+    private Fecha fecha;
+    private String desripcion;
 
+    public TInformativa(Fecha fecha, String nombre, String descripcion){
+        this.fecha=fecha;
+    }
+    
     public String getNombre() {
         return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-    
-     public void setFecha(Fecha fecha) {
-        this.fecha = fecha;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public Fecha getFecha() {
+        return fecha;
     }
-    
+
+    public void setFecha(Fecha fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getDesripcion() {
+        return desripcion;
+    }
+
+    public void setDesripcion(String desripcion) {
+        this.desripcion = desripcion;
+    }
 }
