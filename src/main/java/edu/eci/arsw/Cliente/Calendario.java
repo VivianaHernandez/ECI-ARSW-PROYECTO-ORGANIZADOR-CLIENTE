@@ -27,17 +27,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Calendario extends JFrame {
      static JLabel jLabel11;
      static Calendario calendario=null;
-     private static  TColaborativa colab=null;
-     private static  TInformativa infor=null;
+      static  TColaborativa colab=null;
+     static  TInformativa infor=null;
     
 
     public static void devolverInfo(TColaborativa c) {
         
-        this.colab=c;
+        colab=c;
+        System.out.println("FUNCIONA COLABORATIVA");
     }
 
     public static void devolverInfo(TInformativa i) {
-        this.infor=i;
+        infor=i;
+        System.out.println("FUNCIONA INFORMATIVA");
     }
      private Fecha cl;
      static CalendarioCaptureStub calendarioCaptureStub;
