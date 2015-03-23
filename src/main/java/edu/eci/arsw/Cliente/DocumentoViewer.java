@@ -18,7 +18,7 @@ public class DocumentoViewer {
     static TColaborativa tc;
    
             
-   /* public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, CalendarioCaptureException, RemoteException, AccessException, NotBoundException, BadLocationException {
+    /*public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, CalendarioCaptureException, RemoteException, AccessException, NotBoundException, BadLocationException {
       
        // d=new Documento(calendarioCaptureStub);
         
