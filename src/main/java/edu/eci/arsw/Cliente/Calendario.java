@@ -133,7 +133,7 @@ public class Calendario extends JFrame {
     public static void main(String args[]) throws CalendarioCaptureException {
      
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-        final CalendarioCaptureStub calendarioCaptureStub = (CalendarioCaptureStub)ac.getBean("calendarioCaptureStub");
+        calendarioCaptureStub = (CalendarioCaptureStub)ac.getBean("calendarioCaptureStub");
       
         
         calendario=new Calendario();
@@ -161,6 +161,7 @@ public class Calendario extends JFrame {
     System.out.println("Traer Nombre: "+colabo.getNombre());
     System.out.println("Traer descripcion: "+colabo.getDesripcion());
     System.out.println("Traer Fecha: "+colabo.getFecha().getDia());
+    System.out.println("tarea colaborativa viene en"+colabo.getClass().getName());
     calendarioCaptureStub.enviarTareaColaborativa(colabo);
     System.out.println("Salio de colaborativa ");
     }
