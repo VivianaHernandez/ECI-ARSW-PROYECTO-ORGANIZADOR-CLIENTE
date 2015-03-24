@@ -8,6 +8,7 @@ package edu.eci.arsw.Cliente;
 import edu.eci.arsw.CalendarioComun.Fecha;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
 import edu.eci.arsw.CalendarioComun.TInformativa;
+import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -179,6 +180,8 @@ public class Informacion extends javax.swing.JFrame {
              c.continuarTI(infor);
         } catch (CalendarioCaptureException ex) {
             Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_informativaActionPerformed
 
@@ -188,6 +191,8 @@ public class Informacion extends javax.swing.JFrame {
         try {
             c.continuarTC(colab);
         } catch (CalendarioCaptureException ex) {
+            Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
             Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_colaborativaActionPerformed

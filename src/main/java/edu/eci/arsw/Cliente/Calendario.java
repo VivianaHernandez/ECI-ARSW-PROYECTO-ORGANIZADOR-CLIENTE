@@ -127,35 +127,30 @@ public class Calendario extends JFrame {
         System.out.println("VOLVIO A CALENDARIO");
     }//GEN-LAST:event_seleccionarActionPerformed
     
-    
-    
-    
     public static void main(String args[]) throws CalendarioCaptureException {
      
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
         calendarioCaptureStub = (CalendarioCaptureStub)ac.getBean("calendarioCaptureStub");
-      
+        //System.out.println(calendarioCaptureStub.getTareaColaborativa().getDesripcion());
         
         calendario=new Calendario();
         calendario.setVisible(true);
         calendario.setLocationRelativeTo(null);
         calendario.setSize(415, 415);
-        calendario.setResizable(false);
-        
-        
+        calendario.setResizable(false);   
     }
  
-    public void continuarTI(TInformativa inform) throws CalendarioCaptureException
+    public void continuarTI(TInformativa inform) throws CalendarioCaptureException, RemoteException
     {
     infor=inform;
     System.out.println("Traer Nombre: "+inform.getNombre());
     System.out.println("Traer descripcion: "+inform.getDesripcion());
     System.out.println("Traer Fecha: "+inform.getFecha().getDia());
     calendarioCaptureStub.enviarTareaInformativa(inform);
-        System.out.println("Salio de informativa ");
+    System.out.println("Salio de informativa ");
     }
     
-    public void continuarTC(TColaborativa colabo) throws CalendarioCaptureException
+    public void continuarTC(TColaborativa colabo) throws CalendarioCaptureException, RemoteException
     {
     colab=colabo;
     System.out.println("Traer Nombre: "+colabo.getNombre());
@@ -165,8 +160,6 @@ public class Calendario extends JFrame {
     calendarioCaptureStub.enviarTareaColaborativa(colabo);
     System.out.println("Salio de colaborativa ");
     }
-    
-    
      public static CalendarioCaptureStub getProxy(String ip, int puerto, String nombreObjeto) throws AccessException, RemoteException, NotBoundException {
 
         Registry reg = LocateRegistry.getRegistry(ip, puerto);
