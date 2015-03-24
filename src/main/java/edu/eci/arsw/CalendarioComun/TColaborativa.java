@@ -14,10 +14,12 @@ import java.io.Serializable;
 public class TColaborativa implements Serializable{
     private String nombre;
     private Fecha fecha;
-    private String desripcion;
+    private String descripcion;
 
     public TColaborativa(Fecha fecha, String nombre, String descripcion){
         this.fecha=fecha;
+        this.nombre=nombre;
+        this.descripcion=descripcion;
     }
     
     
@@ -38,10 +40,10 @@ public class TColaborativa implements Serializable{
     }
 
     public String getDesripcion() {
-        return desripcion;
+        return descripcion;
     }
 
     public void setDesripcion(String desripcion) {
-        this.desripcion = desripcion;
+        this.descripcion = desripcion;
     }
 }

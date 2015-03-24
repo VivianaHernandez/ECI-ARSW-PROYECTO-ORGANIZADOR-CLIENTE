@@ -8,33 +8,27 @@ package edu.eci.arsw.Cliente;
 import edu.eci.arsw.CalendarioComun.Fecha;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
 import edu.eci.arsw.CalendarioComun.TInformativa;
-import java.awt.Color;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-/**
- *
- * @author Torres
- */
 public class Calendario extends JFrame {
      static JLabel jLabel11;
      static Calendario calendario=null;
-      static  TColaborativa colab=null;
-     static  TInformativa infor=null;
+     static TColaborativa colab;
+     static TInformativa infor;
      private Fecha cl;
      static CalendarioCaptureStub calendarioCaptureStub;
      static Documento d;
-    static Informacion vp;
+     static Informacion vp;
+           
     public Calendario() {
         initComponents();
     }
@@ -128,60 +122,49 @@ public class Calendario extends JFrame {
         int dia=fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
         cl=new Fecha(dia,mes,año);
         calendario.setVisible(false);
-        vp = new Informacion(cl);
-        vp.info();
-        boolean estado=vp.getEstado();
-        while(estado==false)
-        {
-        estado=vp.getEstado();
-        }
-        PrepararTarea();
-        
-        
+        vp = new Informacion(cl,this);
+       
         System.out.println("VOLVIO A CALENDARIO");
     }//GEN-LAST:event_seleccionarActionPerformed
     
+    
+    
+    
     public static void main(String args[]) throws CalendarioCaptureException {
      
-        
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
         final CalendarioCaptureStub calendarioCaptureStub = (CalendarioCaptureStub)ac.getBean("calendarioCaptureStub");
       
+        
         calendario=new Calendario();
         calendario.setVisible(true);
         calendario.setLocationRelativeTo(null);
         calendario.setSize(415, 415);
         calendario.setResizable(false);
+        
+        
     }
  
-    public boolean esTInformativa()
+    public void continuarTI(TInformativa inform) throws CalendarioCaptureException
     {
-        boolean tipo=false;
-    if(infor!=null){
-    tipo=true;
-    }
-    return tipo;
+    infor=inform;
+    System.out.println("Traer Nombre: "+inform.getNombre());
+    System.out.println("Traer descripcion: "+inform.getDesripcion());
+    System.out.println("Traer Fecha: "+inform.getFecha().getDia());
+    calendarioCaptureStub.enviarTareaInformativa(inform);
+        System.out.println("Salio de informativa ");
     }
     
-    public void PrepararTarea()
+    public void continuarTC(TColaborativa colabo) throws CalendarioCaptureException
     {
-    if(esTInformativa()==true)
-        {
-            try {
-                infor=vp.devolverTareaI();
-                calendarioCaptureStub.enviarTareaInformativa(infor);
-            } catch (CalendarioCaptureException ex) {
-                Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else{
-            try {
-                calendarioCaptureStub.enviarTareaColaborativa(colab);
-            } catch (CalendarioCaptureException ex) {
-                Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            }
-       
+    colab=colabo;
+    System.out.println("Traer Nombre: "+colabo.getNombre());
+    System.out.println("Traer descripcion: "+colabo.getDesripcion());
+    System.out.println("Traer Fecha: "+colabo.getFecha().getDia());
+    calendarioCaptureStub.enviarTareaColaborativa(colabo);
+    System.out.println("Salio de colaborativa ");
     }
+    
     
      public static CalendarioCaptureStub getProxy(String ip, int puerto, String nombreObjeto) throws AccessException, RemoteException, NotBoundException {
 
