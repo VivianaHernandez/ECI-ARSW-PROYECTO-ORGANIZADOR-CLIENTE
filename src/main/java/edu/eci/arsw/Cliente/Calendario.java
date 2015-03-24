@@ -20,15 +20,17 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Calendario extends JFrame {
-     static JLabel jLabel11;
-     static Calendario calendario=null;
-     static TColaborativa colab;
-     static TInformativa infor;
-     private Fecha cl;
-     static CalendarioCaptureStub calendarioCaptureStub;
-     static Documento d;
-     static Informacion vp;
-           
+
+    static JLabel jLabel11;
+    static Calendario calendario = null;
+    static TColaborativa colab;
+    static TInformativa infor;
+    private Fecha cl;
+    static CalendarioCaptureStub calendarioCaptureStub;
+    static Documento d;
+    static Informacion vp;
+    static CalendarioL calenda;
+
     public Calendario() {
         initComponents();
     }
@@ -117,50 +119,51 @@ public class Calendario extends JFrame {
 
     private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
         System.out.println("HOLA");
-        int mes=fecha.getCalendar().get(Calendar.MONTH)+1;
-        int año=fecha.getCalendar().get(Calendar.YEAR);
-        int dia=fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
-        cl=new Fecha(dia,mes,año);
+        int mes = fecha.getCalendar().get(Calendar.MONTH) + 1;
+        int año = fecha.getCalendar().get(Calendar.YEAR);
+        int dia = fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
+        cl = new Fecha(dia, mes, año);
         calendario.setVisible(false);
-        vp = new Informacion(cl,this);
-       
+        vp = new Informacion(cl, this);
+
         System.out.println("VOLVIO A CALENDARIO");
     }//GEN-LAST:event_seleccionarActionPerformed
-    
+
     public static void main(String args[]) throws CalendarioCaptureException {
-     
-        ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-        calendarioCaptureStub = (CalendarioCaptureStub)ac.getBean("calendarioCaptureStub");
+
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        calendarioCaptureStub = (CalendarioCaptureStub) ac.getBean("calendarioCaptureStub");
         //System.out.println(calendarioCaptureStub.getTareaColaborativa().getDesripcion());
-        
-        calendario=new Calendario();
+
+        calendario = new Calendario();
         calendario.setVisible(true);
         calendario.setLocationRelativeTo(null);
         calendario.setSize(415, 415);
-        calendario.setResizable(false);   
+        calendario.setResizable(false);
     }
- 
-    public void continuarTI(TInformativa inform) throws CalendarioCaptureException, RemoteException
-    {
-    infor=inform;
-    System.out.println("Traer Nombre: "+inform.getNombre());
-    System.out.println("Traer descripcion: "+inform.getDesripcion());
-    System.out.println("Traer Fecha: "+inform.getFecha().getDia());
-    calendarioCaptureStub.enviarTareaInformativa(inform);
-    System.out.println("Salio de informativa ");
+
+    public void continuarTI(TInformativa inform) throws CalendarioCaptureException, RemoteException {
+        infor = inform;
+        System.out.println("Traer Nombre: " + inform.getNombre());
+        System.out.println("Traer descripcion: " + inform.getDesripcion());
+        System.out.println("Traer Fecha: " + inform.getFecha().getDia());
+        calendarioCaptureStub.enviarTareaInformativa(inform);
+        calenda=new CalendarioL(inform.getFecha(), null, inform);
+        System.out.println("Salio de informativa ");
     }
-    
-    public void continuarTC(TColaborativa colabo) throws CalendarioCaptureException, RemoteException
-    {
-    colab=colabo;
-    System.out.println("Traer Nombre: "+colabo.getNombre());
-    System.out.println("Traer descripcion: "+colabo.getDesripcion());
-    System.out.println("Traer Fecha: "+colabo.getFecha().getDia());
-    System.out.println("tarea colaborativa viene en"+colabo.getClass().getName());
-    calendarioCaptureStub.enviarTareaColaborativa(colabo);
-    System.out.println("Salio de colaborativa ");
+
+    public void continuarTC(TColaborativa colabo) throws CalendarioCaptureException, RemoteException {
+        colab = colabo;
+        System.out.println("Traer Nombre: " + colabo.getNombre());
+        System.out.println("Traer descripcion: " + colabo.getDesripcion());
+        System.out.println("Traer Fecha: " + colabo.getFecha().getDia());
+        System.out.println("tarea colaborativa viene en" + colabo.getClass().getName());
+        calendarioCaptureStub.enviarTareaColaborativa(colabo);
+        calenda=new CalendarioL(colabo.getFecha(), colabo, null);
+        System.out.println("Salio de colaborativa ");
     }
-     public static CalendarioCaptureStub getProxy(String ip, int puerto, String nombreObjeto) throws AccessException, RemoteException, NotBoundException {
+
+    public static CalendarioCaptureStub getProxy(String ip, int puerto, String nombreObjeto) throws AccessException, RemoteException, NotBoundException {
 
         Registry reg = LocateRegistry.getRegistry(ip, puerto);
         CalendarioCaptureStub objeto = (CalendarioCaptureStub) reg.lookup(nombreObjeto);

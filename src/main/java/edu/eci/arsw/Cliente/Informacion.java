@@ -37,6 +37,7 @@ public class Informacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox();
         colaborativa = new javax.swing.JButton();
         informativa = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -46,6 +47,8 @@ public class Informacion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         nombreOk = new javax.swing.JButton();
         descripcionOK = new javax.swing.JButton();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,8 +139,8 @@ public class Informacion extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGap(94, 94, 94)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                                     .addComponent(jTextField1))
                                 .addGap(18, 18, 18)
@@ -145,7 +148,7 @@ public class Informacion extends javax.swing.JFrame {
                                     .addComponent(nombreOk)
                                     .addComponent(descripcionOK)))
                             .addComponent(jLabel1))))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,6 +220,7 @@ public class Informacion extends javax.swing.JFrame {
     private javax.swing.JButton colaborativa;
     private javax.swing.JButton descripcionOK;
     private javax.swing.JButton informativa;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
