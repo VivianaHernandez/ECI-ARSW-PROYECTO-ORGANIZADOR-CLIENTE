@@ -15,6 +15,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import org.springframework.context.ApplicationContext;
@@ -29,29 +31,14 @@ public class Calendario extends JFrame {
      static Calendario calendario=null;
       static  TColaborativa colab=null;
      static  TInformativa infor=null;
-    
-
-    public static void devolverInfo(TColaborativa c) {
-        
-        colab=c;
-        System.out.println("FUNCIONA COLABORATIVA");
-    }
-
-    public static void devolverInfo(TInformativa i) {
-        infor=i;
-        System.out.println("FUNCIONA INFORMATIVA");
-    }
      private Fecha cl;
      static CalendarioCaptureStub calendarioCaptureStub;
      static Documento d;
-     static TColaborativa tc;
-    
-     
+    static Informacion vp;
     public Calendario() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -141,8 +128,16 @@ public class Calendario extends JFrame {
         int dia=fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
         cl=new Fecha(dia,mes,año);
         calendario.setVisible(false);
-        Informacion vp = new Informacion(cl);
+        vp = new Informacion(cl);
         vp.info();
+        boolean estado=vp.getEstado();
+        while(estado==false)
+        {
+        estado=vp.getEstado();
+        }
+        PrepararTarea();
+        
+        
         System.out.println("VOLVIO A CALENDARIO");
     }//GEN-LAST:event_seleccionarActionPerformed
     
@@ -151,15 +146,41 @@ public class Calendario extends JFrame {
         
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
         final CalendarioCaptureStub calendarioCaptureStub = (CalendarioCaptureStub)ac.getBean("calendarioCaptureStub");
-          
-        
-        tc=calendarioCaptureStub.getTareaColaborativa();
-        
+      
         calendario=new Calendario();
         calendario.setVisible(true);
         calendario.setLocationRelativeTo(null);
         calendario.setSize(415, 415);
         calendario.setResizable(false);
+    }
+ 
+    public boolean esTInformativa()
+    {
+        boolean tipo=false;
+    if(infor!=null){
+    tipo=true;
+    }
+    return tipo;
+    }
+    
+    public void PrepararTarea()
+    {
+    if(esTInformativa()==true)
+        {
+            try {
+                infor=vp.devolverTareaI();
+                calendarioCaptureStub.enviarTareaInformativa(infor);
+            } catch (CalendarioCaptureException ex) {
+                Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                calendarioCaptureStub.enviarTareaColaborativa(colab);
+            } catch (CalendarioCaptureException ex) {
+                Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+       
     }
     
      public static CalendarioCaptureStub getProxy(String ip, int puerto, String nombreObjeto) throws AccessException, RemoteException, NotBoundException {

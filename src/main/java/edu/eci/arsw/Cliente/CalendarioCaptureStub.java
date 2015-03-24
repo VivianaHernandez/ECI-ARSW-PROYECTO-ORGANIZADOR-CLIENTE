@@ -8,12 +8,14 @@ package edu.eci.arsw.Cliente;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
 import edu.eci.arsw.CalendarioComun.TInformativa;
 
-
-
 public interface CalendarioCaptureStub 
 {
   public String getTexto() throws CalendarioCaptureException;
   public void setTexto(int Posicion,String texto) throws CalendarioCaptureException;
+  
+  public void enviarTareaInformativa(TInformativa ti) throws CalendarioCaptureException;
+  public void enviarTareaColaborativa(TColaborativa tc) throws CalendarioCaptureException;
+  
   public TColaborativa getTareaColaborativa()throws CalendarioCaptureException;
   public TInformativa getTareaInformativa()throws CalendarioCaptureException;
 }
