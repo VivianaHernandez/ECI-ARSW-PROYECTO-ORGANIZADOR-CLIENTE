@@ -15,13 +15,13 @@ public class TColaborativa implements Serializable{
     private String nombre;
     private Fecha fecha;
     private String descripcion;
+    private Documento doc;
 
     public TColaborativa(Fecha fecha, String nombre, String descripcion){
         this.fecha=fecha;
         this.nombre=nombre;
         this.descripcion=descripcion;
     }
-    
     
     public String getNombre() {
         return nombre;
@@ -45,5 +45,13 @@ public class TColaborativa implements Serializable{
 
     public void setDesripcion(String desripcion) {
         this.descripcion = desripcion;
+    }
+    
+      public void setDoc(Documento doc) {
+        this.doc = doc;
+    }
+
+    public Documento getDoc() {
+        return doc;
     }
 }

@@ -1,4 +1,5 @@
-package edu.eci.arsw.Cliente;
+package edu.eci.arsw.CalendarioComun;
+
 
 public class CalendarioCaptureException extends Exception {
 

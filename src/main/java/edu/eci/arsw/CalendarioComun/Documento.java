@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.Cliente;
+package edu.eci.arsw.CalendarioComun;
+
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,31 +33,30 @@ public class Documento {
                 @Override
                 public void caretUpdate(CaretEvent e){
                
-               int pos=e.getDot(),longi=1;
-               text=textArea.getText();
-              
                     try {
+                        int pos=e.getDot(),longi=1;
+                        text=textArea.getText();
                         nuevo = textArea.getText(pos-1,longi);
-                    } catch (BadLocationException ex) {
-                        Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
-                    } 
-                    try {
                         calendarioCaptureStub.setTexto(pos,nuevo);
+                    } catch (BadLocationException ex) {
+                        Logger.getLogger(Documento.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (CalendarioCaptureException ex) {
-                        Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Documento.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                   
                 }
         });
-        try {
-                      
+                 
             while(b==true){
-            palabras=calendarioCaptureStub.getTexto();
-                        setTexto(palabras);
-                        jf.repaint();
+             try {
+                 palabras=calendarioCaptureStub.getTexto();
+                 setTexto(palabras);
+                 jf.repaint();
+             } catch (CalendarioCaptureException ex) {
+                 Logger.getLogger(Documento.class.getName()).log(Level.SEVERE, null, ex);
+             }
             }
-                    } catch (CalendarioCaptureException ex) {
-                        Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                   
     }
     
     
@@ -81,21 +81,7 @@ public class Documento {
      }
     }
  
-    private static void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                             
-          try {
-            //mec.Guardar(evt, textArea, defaultPath);
-        } catch (Exception ex) {
-            Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }                                            
-
-    private static void loadMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        try {
-            //mec.cargar(textArea, defaultPath);
-        } catch (Exception ex) {
-            Logger.getLogger(DocumentoViewer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    } 
+   
     
     public static void initComponents() {
 
@@ -129,7 +115,7 @@ public class Documento {
         saveMenuItem.setText("save");
         saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveMenuItemActionPerformed(evt);
+                //saveMenuItemActionPerformed(evt);
             }
         });
         jMenu1.add(saveMenuItem);
@@ -137,7 +123,7 @@ public class Documento {
         loadMenuItem.setText("load");
         loadMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadMenuItemActionPerformed(evt);
+                //loadMenuItemActionPerformed(evt);
             }
         });
         jMenu1.add(loadMenuItem);

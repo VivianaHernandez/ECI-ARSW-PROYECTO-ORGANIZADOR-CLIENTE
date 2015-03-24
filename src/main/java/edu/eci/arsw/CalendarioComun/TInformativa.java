@@ -15,6 +15,7 @@ public class TInformativa implements Serializable{
     private String nombre;
     private Fecha fecha;
     private String descripcion;
+    private Alarma alarma;
 
     public TInformativa(Fecha fecha, String nombre, String descripcion){
         this.fecha=fecha;
@@ -38,11 +39,19 @@ public class TInformativa implements Serializable{
         this.fecha = fecha;
     }
 
-    public String getDesripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDesripcion(String desripcion) {
-        this.descripcion = desripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    public Alarma getAlarma() {
+        return alarma;
+    }
+
+    public void setAlarma(Alarma alarma) {
+        this.alarma = alarma;
     }
 }

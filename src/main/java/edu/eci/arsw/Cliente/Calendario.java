@@ -5,6 +5,10 @@
  */
 package edu.eci.arsw.Cliente;
 
+import edu.eci.arsw.CalendarioComun.Alarma;
+import edu.eci.arsw.CalendarioComun.CalendarioCaptureException;
+import edu.eci.arsw.CalendarioComun.CalendarioCaptureStub;
+import edu.eci.arsw.CalendarioComun.Documento;
 import edu.eci.arsw.CalendarioComun.Fecha;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
 import edu.eci.arsw.CalendarioComun.TInformativa;
@@ -13,9 +17,12 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.text.BadLocationException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -30,7 +37,9 @@ public class Calendario extends JFrame {
     static Documento d;
     static Informacion vp;
     static CalendarioL calenda;
-
+    static Alarma alarma;
+    static Date date;
+    
     public Calendario() {
         initComponents();
     }
@@ -122,6 +131,7 @@ public class Calendario extends JFrame {
         int mes = fecha.getCalendar().get(Calendar.MONTH) + 1;
         int año = fecha.getCalendar().get(Calendar.YEAR);
         int dia = fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
+        date=new Date(año,mes,dia);
         cl = new Fecha(dia, mes, año);
         calendario.setVisible(false);
         vp = new Informacion(cl, this);
@@ -133,7 +143,8 @@ public class Calendario extends JFrame {
 
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         calendarioCaptureStub = (CalendarioCaptureStub) ac.getBean("calendarioCaptureStub");
-        System.out.println(calendarioCaptureStub.getTareaColaborativa().getDesripcion());
+        
+        verTareas();
 
         calendario = new Calendario();
         calendario.setVisible(true);
@@ -141,23 +152,54 @@ public class Calendario extends JFrame {
         calendario.setSize(415, 415);
         calendario.setResizable(false);
     }
+    
+    public static void verTareas() throws CalendarioCaptureException, RemoteException
+    {
+        ArrayList<TInformativa> ti=calendarioCaptureStub.getTareaInformativa();
+        for(int i=0;i<ti.size();i++)
+        {
+        adicionarTareaICalendario(ti.get(i));
+        }
+        
+        ArrayList<TColaborativa> tc=calendarioCaptureStub.getTareaColaborativa();
+        for(int j=0;j<tc.size();j++)
+        {
+        adicionarTareaCCalendario(tc.get(j));
+        }
+    }
+    public static void adicionarTareaICalendario(TInformativa ti)
+    {
+    
+    }
+    
+    public static void adicionarTareaCCalendario(TColaborativa tc)
+    {
+    
+    }
 
     public void continuarTI(TInformativa inform) throws CalendarioCaptureException, RemoteException {
         infor = inform;
         System.out.println("Traer Nombre: " + inform.getNombre());
-        System.out.println("Traer descripcion: " + inform.getDesripcion());
+        System.out.println("Traer descripcion: " + inform.getDescripcion());
         System.out.println("Traer Fecha: " + inform.getFecha().getDia());
+        
+        alarma=new Alarma(date);
+        inform.setAlarma(alarma);
+        
         calendarioCaptureStub.enviarTareaInformativa(inform);
         calenda=new CalendarioL(inform.getFecha(), null, inform);
         System.out.println("Salio de informativa ");
     }
 
-    public void continuarTC(TColaborativa colabo) throws CalendarioCaptureException, RemoteException {
+    public void continuarTC(TColaborativa colabo) throws CalendarioCaptureException, RemoteException, BadLocationException {
         colab = colabo;
         System.out.println("Traer Nombre: " + colabo.getNombre());
         System.out.println("Traer descripcion: " + colabo.getDesripcion());
         System.out.println("Traer Fecha: " + colabo.getFecha().getDia());
         System.out.println("tarea colaborativa viene en" + colabo.getClass().getName());
+        d=new Documento(calendarioCaptureStub);
+        colabo.setDoc(d);
+        
         calendarioCaptureStub.enviarTareaColaborativa(colabo);
         calenda=new CalendarioL(colabo.getFecha(), colabo, null);
         System.out.println("Salio de colaborativa ");

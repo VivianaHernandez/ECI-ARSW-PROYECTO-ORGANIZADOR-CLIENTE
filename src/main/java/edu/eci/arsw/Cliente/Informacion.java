@@ -5,12 +5,14 @@
  */
 package edu.eci.arsw.Cliente;
 
+import edu.eci.arsw.CalendarioComun.CalendarioCaptureException;
 import edu.eci.arsw.CalendarioComun.Fecha;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
 import edu.eci.arsw.CalendarioComun.TInformativa;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.text.BadLocationException;
 
 public class Informacion extends javax.swing.JFrame {
     private Fecha fecha;
@@ -180,9 +182,11 @@ public class Informacion extends javax.swing.JFrame {
          
       infor=new TInformativa(fecha, nombre, descripcion);
         try {
-             c.continuarTI(infor);
-        } catch (CalendarioCaptureException ex) {
-            Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
+          try {
+              c.continuarTI(infor);
+          } catch (CalendarioCaptureException ex) {
+              Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
+          }
         } catch (RemoteException ex) {
             Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -192,9 +196,13 @@ public class Informacion extends javax.swing.JFrame {
     private void colaborativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colaborativaActionPerformed
         colab=new TColaborativa(fecha, nombre, descripcion);
         try {
-            c.continuarTC(colab);
-        } catch (CalendarioCaptureException ex) {
-            Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                c.continuarTC(colab);
+            } catch (CalendarioCaptureException ex) {
+                Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (BadLocationException ex) {
+                Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (RemoteException ex) {
             Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
         }
