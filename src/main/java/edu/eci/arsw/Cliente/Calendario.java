@@ -39,6 +39,8 @@ public class Calendario extends JFrame {
     static CalendarioL calenda=new CalendarioL();
     static Alarma alarma;
     static Date date;
+    static ArrayList<TInformativa> ti;
+    static ArrayList<TColaborativa> tc;
     
     public Calendario() {
         initComponents();
@@ -148,7 +150,7 @@ public class Calendario extends JFrame {
         calendarioCaptureStub = (CalendarioCaptureStub) ac.getBean("calendarioCaptureStub");
         
         verTareas();
-
+        
         calendario = new Calendario();
         calendario.setVisible(true);
         calendario.setLocationRelativeTo(null);
@@ -158,21 +160,69 @@ public class Calendario extends JFrame {
     
     public void validarSiExisteTarea(Fecha fechac)
     {
+        int tam=calenda.getTareasColaborativas().size();
+        System.out.println("Tamaño "+tam);
+        Fecha f;
+        for (int i = 0; i < tam; i++) {
+            System.out.println("Entro al for+*+**+*+*+*+*");
+            System.out.println("Fecha "+fechac.getAnio()+"/"+fechac.getDia());
+            if (calenda.getTareasColaborativas().get(i).getFecha().equals(fechac)) {
+                DatosTareas dt=new DatosTareas(calenda.getTareasColaborativas().get(i));
+            } else {
+                
+                Informacion in = new Informacion(fechac, this);
+                
+            }
+
+        }
+        if(tam==0){
+            Informacion in = new Informacion(fechac, this);
+        }
+        
+        
+        /*Tareas informivas*/
+
+        int tam1=calenda.getTareasInformativas().size();
+        System.out.println("Tamaño "+tam);
+       
+        for (int i = 0; i < tam1; i++) {
+            System.out.println("Entro al for+*+**+*+*+*+*");
+            System.out.println("Fecha "+fechac.getAnio()+"/"+fechac.getDia());
+            if (calenda.getTareasInformativas().get(i).getFecha().equals(fechac)) {
+                DatosTareas dt=new DatosTareas(calenda.getTareasInformativas().get(i));
+            } else {
+                
+                Informacion in = new Informacion(fechac, this);
+                
+            }
+
+        }
+        if(tam==0){
+            Informacion in = new Informacion(fechac, this);
+        }
+        
+        
+        
   
     }
     
     public static void verTareas() throws CalendarioCaptureException, RemoteException
     {
-        ArrayList<TInformativa> ti=calendarioCaptureStub.getTareaInformativa();
+        ti=calendarioCaptureStub.getTareaInformativa();
         for(int i=0;i<ti.size();i++)
-        {
-        adicionarTareaICalendario(ti.get(i));
+        {  
+                adicionarTareaICalendario(ti.get(i));
+            
+                System.out.println("*******************************Tarea "+ti.get(i).getNombre());
+                
         }
         
-        ArrayList<TColaborativa> tc=calendarioCaptureStub.getTareaColaborativa();
+        tc=calendarioCaptureStub.getTareaColaborativa();
         for(int j=0;j<tc.size();j++)
         {
+            
         adicionarTareaCCalendario(tc.get(j));
+        System.out.println("***************************************+Tarea "+ti.get(j).getNombre());
         }
     }
     public static void adicionarTareaICalendario(TInformativa ti)
@@ -192,6 +242,7 @@ public class Calendario extends JFrame {
         System.out.println("Traer descripcion: " + inform.getDescripcion());
         System.out.println("Traer Fecha: " + inform.getFecha().getDia());
         
+      
         alarma=new Alarma(date);
         inform.setAlarma(alarma);
         
@@ -203,7 +254,7 @@ public class Calendario extends JFrame {
     public void continuarTC(TColaborativa colabo) throws CalendarioCaptureException, RemoteException, BadLocationException {
         colab = colabo;
         System.out.println("Traer Nombre: " + colabo.getNombre());
-        System.out.println("Traer descripcion: " + colabo.getDesripcion());
+        System.out.println("Traer descripcion: " + colabo.getDescripcion());
         System.out.println("Traer Fecha: " + colabo.getFecha().getDia());
         System.out.println("tarea colaborativa viene en" + colabo.getClass().getName());
         d=new Documento(calendarioCaptureStub);

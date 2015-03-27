@@ -8,6 +8,7 @@ package edu.eci.arsw.Cliente;
 import edu.eci.arsw.CalendarioComun.Fecha;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
 import edu.eci.arsw.CalendarioComun.TInformativa;
+import static edu.eci.arsw.Cliente.Calendario.ti;
 import java.util.ArrayList;
 
 /**
@@ -15,24 +16,26 @@ import java.util.ArrayList;
  * @author Torres
  */
 public class CalendarioL {
-    
-   private ArrayList<TInformativa> tareasInformativas=new ArrayList<TInformativa>();
-   private ArrayList<TColaborativa> tareasColaborativas=new ArrayList<TColaborativa>();
-    
+
+    private ArrayList<TInformativa> tareasInformativas = new ArrayList<TInformativa>();
+    private ArrayList<TColaborativa> tareasColaborativas = new ArrayList<TColaborativa>();
+
     CalendarioL() {
-      
+
     }
-    
-    public void agregarTareaInformativa(TInformativa ti)
-    {
-    tareasInformativas.add(ti);
+
+    public void agregarTareaInformativa(TInformativa ti) {
+        if (!tareasInformativas.contains(ti)) {
+            tareasInformativas.add(ti);
+        }
     }
-    
-    public void agregarTareaColaborativa(TColaborativa tc)
-    {
-    tareasColaborativas.add(tc);
+
+    public void agregarTareaColaborativa(TColaborativa tc) {
+        if (!tareasColaborativas.contains(tc)) {
+            tareasColaborativas.add(tc);
+        }
     }
-    
+
     public ArrayList<TInformativa> getTareasInformativas() {
         return tareasInformativas;
     }
@@ -49,7 +52,4 @@ public class CalendarioL {
         this.tareasColaborativas = tareasColaborativas;
     }
 
-    
-    
-    
 }
