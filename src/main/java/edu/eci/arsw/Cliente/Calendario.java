@@ -32,11 +32,11 @@ public class Calendario extends JFrame {
     static Calendario calendario = null;
     static TColaborativa colab;
     static TInformativa infor;
-    private Fecha cl;
+    private Fecha fechac;
     static CalendarioCaptureStub calendarioCaptureStub;
     static Documento d;
     static Informacion vp;
-    static CalendarioL calenda;
+    static CalendarioL calenda=new CalendarioL();
     static Alarma alarma;
     static Date date;
     
@@ -127,14 +127,17 @@ public class Calendario extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
-        System.out.println("HOLA");
+    
         int mes = fecha.getCalendar().get(Calendar.MONTH) + 1;
         int año = fecha.getCalendar().get(Calendar.YEAR);
         int dia = fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
         date=new Date(año,mes,dia);
-        cl = new Fecha(dia, mes, año);
+        fechac = new Fecha(dia, mes, año);
         calendario.setVisible(false);
-        vp = new Informacion(cl, this);
+        
+        validarSiExisteTarea(fechac);
+        
+       
 
         System.out.println("VOLVIO A CALENDARIO");
     }//GEN-LAST:event_seleccionarActionPerformed
@@ -153,6 +156,11 @@ public class Calendario extends JFrame {
         calendario.setResizable(false);
     }
     
+    public void validarSiExisteTarea(Fecha fechac)
+    {
+  
+    }
+    
     public static void verTareas() throws CalendarioCaptureException, RemoteException
     {
         ArrayList<TInformativa> ti=calendarioCaptureStub.getTareaInformativa();
@@ -169,12 +177,13 @@ public class Calendario extends JFrame {
     }
     public static void adicionarTareaICalendario(TInformativa ti)
     {
+        calenda.agregarTareaInformativa(ti);
     
     }
     
     public static void adicionarTareaCCalendario(TColaborativa tc)
     {
-    
+        calenda.agregarTareaColaborativa(tc);
     }
 
     public void continuarTI(TInformativa inform) throws CalendarioCaptureException, RemoteException {
@@ -187,7 +196,7 @@ public class Calendario extends JFrame {
         inform.setAlarma(alarma);
         
         calendarioCaptureStub.enviarTareaInformativa(inform);
-        calenda=new CalendarioL(inform.getFecha(), null, inform);
+        calenda.agregarTareaInformativa(infor);
         System.out.println("Salio de informativa ");
     }
 
@@ -201,7 +210,7 @@ public class Calendario extends JFrame {
         colabo.setDoc(d);
         
         calendarioCaptureStub.enviarTareaColaborativa(colabo);
-        calenda=new CalendarioL(colabo.getFecha(), colabo, null);
+        calenda.agregarTareaColaborativa(colab);
         System.out.println("Salio de colaborativa ");
     }
 
