@@ -172,9 +172,19 @@ public class Calendario extends JFrame {
                     DatosTareas dt=new DatosTareas(calenda.getTareasInformativas().get(i));
                     System.out.println("ENTRO A ESTE IF 4444444444444 DEL FOR");
                 } else {
-
                     Informacion in = new Informacion(fechac, this);
-
+                }
+            }
+        }
+        if (tc.size() > 0) {
+            for (int i = 0; i < tc.size(); i++) {
+                System.out.println("444444444422QUE TRAE FECHA EN INFORMATIVA"+calenda.getTareasColaborativas().get(i).getFecha().getDia());
+                if (tc.get(i).getFecha().getDia()==fechac.getDia()&& tc.get(i).getFecha().getAnio()==fechac.getAnio()&& tc.get(i).getFecha().getMes()==fechac.getMes()) {
+                    
+                    DatosTareas dt=new DatosTareas(calenda.getTareasColaborativas().get(i));
+                    System.out.println("ENTRO A ESTE IF 4444444444444 DEL FOR");
+                } else {
+                    Informacion in = new Informacion(fechac, this);
                 }
             }
         }
