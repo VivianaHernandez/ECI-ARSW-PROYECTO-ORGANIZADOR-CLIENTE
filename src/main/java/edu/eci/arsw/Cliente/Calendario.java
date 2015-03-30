@@ -160,50 +160,27 @@ public class Calendario extends JFrame {
     
     public void validarSiExisteTarea(Fecha fechac)
     {
-        int tam=calenda.getTareasColaborativas().size();
+        int tam=ti.size()+tc.size();
+        
         System.out.println("Tamaño "+tam);
-        Fecha f;
-        for (int i = 0; i < tam; i++) {
-            System.out.println("Entro al for+*+**+*+*+*+*");
-            System.out.println("Fecha "+fechac.getAnio()+"/"+fechac.getDia());
-            if (calenda.getTareasColaborativas().get(i).getFecha().equals(fechac)) {
-                DatosTareas dt=new DatosTareas(calenda.getTareasColaborativas().get(i));
-            } else {
-                
-                Informacion in = new Informacion(fechac, this);
-                
-            }
+        
+        if (ti.size() > 0) {
+            for (int i = 0; i < ti.size(); i++) {
+                System.out.println("444444444422QUE TRAE FECHA EN INFORMATIVA"+calenda.getTareasInformativas().get(i).getFecha().getDia());
+                if (ti.get(i).getFecha().getDia()==fechac.getDia()&& ti.get(i).getFecha().getAnio()==fechac.getAnio()&& ti.get(i).getFecha().getMes()==fechac.getMes()) {
+                    
+                    DatosTareas dt=new DatosTareas(calenda.getTareasInformativas().get(i));
+                    System.out.println("ENTRO A ESTE IF 4444444444444 DEL FOR");
+                } else {
 
+                    Informacion in = new Informacion(fechac, this);
+
+                }
+            }
         }
         if(tam==0){
             Informacion in = new Informacion(fechac, this);
         }
-        
-        
-        /*Tareas informivas*/
-
-        int tam1=calenda.getTareasInformativas().size();
-        System.out.println("Tamaño "+tam);
-       
-        for (int i = 0; i < tam1; i++) {
-            System.out.println("Entro al for+*+**+*+*+*+*");
-            System.out.println("Fecha "+fechac.getAnio()+"/"+fechac.getDia());
-            if (calenda.getTareasInformativas().get(i).getFecha().equals(fechac)) {
-                DatosTareas dt=new DatosTareas(calenda.getTareasInformativas().get(i));
-            } else {
-                
-                Informacion in = new Informacion(fechac, this);
-                
-            }
-
-        }
-        if(tam==0){
-            Informacion in = new Informacion(fechac, this);
-        }
-        
-        
-        
-  
     }
     
     public static void verTareas() throws CalendarioCaptureException, RemoteException

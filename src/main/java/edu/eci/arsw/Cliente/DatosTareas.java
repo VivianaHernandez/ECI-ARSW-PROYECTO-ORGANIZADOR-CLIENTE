@@ -43,6 +43,7 @@ public class DatosTareas extends javax.swing.JFrame {
         dia.setText(ti.getFecha().getDia()+"");
         mes.setText(ti.getFecha().getMes()+"");
         anio.setText(ti.getFecha().getAnio()+"");
+        setVisible(true);
     }
     /**
      * This method is called from within the constructor to initialize the form.
