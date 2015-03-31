@@ -158,4 +158,8 @@ public class Documento {
     private static javax.swing.JMenuItem saveMenuItem;
     private static javax.swing.JTextArea textArea;
     private static javax.swing.JScrollPane textjsp;  
+
+    public void setVisible(boolean b) {
+        jf.setVisible(b);
+    }
 }

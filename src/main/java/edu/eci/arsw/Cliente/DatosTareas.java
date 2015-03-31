@@ -5,19 +5,24 @@
  */
 package edu.eci.arsw.Cliente;
 
+import edu.eci.arsw.CalendarioComun.CalendarioCaptureException;
+import edu.eci.arsw.CalendarioComun.Documento;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
 import edu.eci.arsw.CalendarioComun.TInformativa;
 import static edu.eci.arsw.Cliente.Calendario.calendario;
+import static edu.eci.arsw.Cliente.Calendario.calendarioCaptureStub;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author 2085941
  */
 public class DatosTareas extends javax.swing.JFrame {
-
-    /**
-     * Creates new form DatosTareas
-     */
+    private TColaborativa tc;
+    private TInformativa ti;
     public DatosTareas() {
         initComponents();
         setVisible(true);
@@ -34,6 +39,7 @@ public class DatosTareas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setSize(415, 415);
         setResizable(false);
+        this.tc=tc;
         nomTarea.setText(tc.getNombre());
         descTarea.setText(tc.getDescripcion());
         tipo.setText("Colaborativa");
@@ -48,6 +54,7 @@ public class DatosTareas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setSize(415, 415);
         setResizable(false);
+        this.ti=ti;
         nomTarea.setText(ti.getNombre());
         descTarea.setText(ti.getDescripcion());
         tipo.setText("Informativa");
@@ -230,7 +237,10 @@ public class DatosTareas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if(tipo.getText()=="Colaborativa"){
+            Documento doc=tc.getDoc();
+            doc.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
