@@ -197,6 +197,7 @@ public class Informacion extends javax.swing.JFrame {
         colab=new TColaborativa(fecha, nombre, descripcion);
         try {
             try {
+                System.out.println("llego aqui........................");
                 c.continuarTC(colab);
             } catch (CalendarioCaptureException ex) {
                 Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);

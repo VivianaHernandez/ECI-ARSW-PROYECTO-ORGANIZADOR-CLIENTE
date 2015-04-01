@@ -5,7 +5,6 @@
  */
 package edu.eci.arsw.CalendarioComun;
 
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -15,7 +14,7 @@ import javax.swing.text.BadLocationException;
 
 public class Documento {
 
-    static String palabras;
+    static String palabras="";
     static boolean b=true;
     static String text;
     static String nuevo="";
@@ -33,55 +32,76 @@ public class Documento {
                 @Override
                 public void caretUpdate(CaretEvent e){
                
+               int pos=e.getDot(),longi=1;
+               text=textArea.getText();
+              
                     try {
-                        int pos=e.getDot(),longi=1;
-                        text=textArea.getText();
                         nuevo = textArea.getText(pos-1,longi);
-                        calendarioCaptureStub.setTexto(pos,nuevo);
+                       
                     } catch (BadLocationException ex) {
                         Logger.getLogger(Documento.class.getName()).log(Level.SEVERE, null, ex);
+                    } 
+                    try {
+                        calendarioCaptureStub.setTexto(pos,nuevo);
                     } catch (CalendarioCaptureException ex) {
                         Logger.getLogger(Documento.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                   
                 }
         });
-                 
+       /* try {
+                     
             while(b==true){
-             try {
-                 palabras=calendarioCaptureStub.getTexto();
-                 setTexto(palabras);
-                 jf.repaint();
-             } catch (CalendarioCaptureException ex) {
-                 Logger.getLogger(Documento.class.getName()).log(Level.SEVERE, null, ex);
-             }
+              
+            palabras=calendarioCaptureStub.getTexto();
+                
+                        setTexto(palabras);
+                        jf.repaint();
             }
-                   
+                    } catch (CalendarioCaptureException ex) {
+                        Logger.getLogger(Documento.class.getName()).log(Level.SEVERE, null, ex);
+                    }*/
     }
     
     
     public static void setTexto(String texto) throws BadLocationException
     {
-     String s=texto;
+    String s=texto;
      int uu=1,i;
      char w;
-  
+  System.out.println("llega a set Textoooooooooooooooooo");
         for (i = 0; i < s.length(); i++) {
             w = s.charAt(i);
             String ww = w + "";
             String a = textArea.getText(i, uu);
-
+System.out.println("llega a if equalsssssssssss");
             if (!ww.equals(a)) {
+                
                 textArea.insert(ww, i);
             }
         }
-    for(i=s.length();i<100;i++)
+   if(s.length()>0){
+     for(i=s.length();i<100;i++)
      {
      textArea.insert(" ", i);
-     }
+     }}
+    
     }
  
-   
+    private static void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                             
+          try {
+            //mec.Guardar(evt, textArea, defaultPath);
+        } catch (Exception ex) {
+            Logger.getLogger(Documento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }                                            
+
+    private static void loadMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        try {
+            //mec.cargar(textArea, defaultPath);
+        } catch (Exception ex) {
+            Logger.getLogger(Documento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
     
     public static void initComponents() {
 
@@ -108,14 +128,13 @@ public class Documento {
 
         for(int i=0;i<100;i++){
        textArea.insert(" ",i);}
-        
                 
         jMenu1.setText("File");
 
         saveMenuItem.setText("save");
         saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //saveMenuItemActionPerformed(evt);
+                saveMenuItemActionPerformed(evt);
             }
         });
         jMenu1.add(saveMenuItem);
@@ -123,7 +142,7 @@ public class Documento {
         loadMenuItem.setText("load");
         loadMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //loadMenuItemActionPerformed(evt);
+                loadMenuItemActionPerformed(evt);
             }
         });
         jMenu1.add(loadMenuItem);
@@ -158,8 +177,4 @@ public class Documento {
     private static javax.swing.JMenuItem saveMenuItem;
     private static javax.swing.JTextArea textArea;
     private static javax.swing.JScrollPane textjsp;  
-
-    public void setVisible(boolean b) {
-        jf.setVisible(b);
-    }
 }

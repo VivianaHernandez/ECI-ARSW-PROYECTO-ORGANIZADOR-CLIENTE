@@ -41,6 +41,7 @@ public class Calendario extends JFrame {
     static Date date;
     static ArrayList<TInformativa> ti;
     static ArrayList<TColaborativa> tc;
+    static int tam=0;
     
     public Calendario() {
         initComponents();
@@ -160,7 +161,7 @@ public class Calendario extends JFrame {
     
     public void validarSiExisteTarea(Fecha fechac)
     {
-        int tam=ti.size()+tc.size();
+         tam=tam+ti.size()+tc.size();
         
         System.out.println("Tamaño "+tam);
         
@@ -209,7 +210,7 @@ public class Calendario extends JFrame {
         {
             
         adicionarTareaCCalendario(tc.get(j));
-        System.out.println("***************************************+Tarea "+ti.get(j).getNombre());
+        System.out.println("***************************************+Tarea "+tc.get(j).getNombre());
         }
     }
     public static void adicionarTareaICalendario(TInformativa ti)
@@ -245,10 +246,10 @@ public class Calendario extends JFrame {
         System.out.println("Traer Fecha: " + colabo.getFecha().getDia());
         System.out.println("tarea colaborativa viene en" + colabo.getClass().getName());
         d=new Documento(calendarioCaptureStub);
-        colabo.setDoc(d);
-        
-        calendarioCaptureStub.enviarTareaColaborativa(colabo);
+        //colab.setDoc(d);
         calenda.agregarTareaColaborativa(colab);
+        calendarioCaptureStub.enviarTareaColaborativa(colab);
+        
         System.out.println("Salio de colaborativa ");
     }
 
