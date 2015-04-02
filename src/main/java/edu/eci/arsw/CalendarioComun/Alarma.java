@@ -33,7 +33,9 @@ public class Alarma implements Serializable{
         this.activo = activo;
     }
 
-    
+    public Date getFechaTarea() {
+        return fechaTarea;
+    }
 
     public void activar() {
         Date fechaSis = new Date();
