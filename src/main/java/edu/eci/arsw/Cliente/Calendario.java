@@ -161,6 +161,7 @@ public class Calendario extends JFrame {
     
     public void validarSiExisteTarea(Fecha fechac)
     {
+        int ban=0;
          tam=tam+ti.size()+tc.size();
         
         System.out.println("Tamaño "+tam);
@@ -169,11 +170,38 @@ public class Calendario extends JFrame {
             for (int i = 0; i < ti.size(); i++) {
                 System.out.println("444444444422QUE TRAE FECHA EN INFORMATIVA"+calenda.getTareasInformativas().get(i).getFecha().getDia());
                 if (ti.get(i).getFecha().getDia()==fechac.getDia()&& ti.get(i).getFecha().getAnio()==fechac.getAnio()&& ti.get(i).getFecha().getMes()==fechac.getMes()) {
-                    
+                   
+                        Calendar Cal= Calendar.getInstance();
+                        String fec= Cal.get(Cal.DATE)+"/"+(Cal.get(Cal.MONTH)+1)+"/"+Cal.get(Cal.YEAR)+" "+Cal.get(Cal.HOUR_OF_DAY)+":"+Cal.get(Cal.MINUTE)+":"+Cal.get(Cal.SECOND); 
+                        int mes=Cal.get(Cal.MONTH)+1;
+                        System.out.println("fecha : "+fec);
+                        System.out.println("dia 1 de calendario : "+Cal.get(Cal.DATE)+"  dia 2 de tarea : "+ti.get(i).getFecha().getDia());
+                        System.out.println("mes 1 de calendario : "+mes+"  dia 2 de tarea : "+ti.get(i).getFecha().getMes());
+                        System.out.println("año 1 de calendario : "+Cal.get(Cal.YEAR)+"  dia 2 de tarea : "+ti.get(i).getFecha().getAnio());
+                        
+                        Date fe=new Date(ti.get(i).getFecha().getAnio(), ti.get(i).getFecha().getMes(), ti.get(i).getFecha().getDia());
+                        
+                        if(ti.get(i).getFecha().getDia()==Cal.get(Cal.DATE)&&
+                           ti.get(i).getFecha().getMes()==mes&&
+                           ti.get(i).getFecha().getAnio()==Cal.get(Cal.YEAR)){
+                            System.out.println("PASO ACA");
+                            
+                            Date fech=ti.get(i).getAlarma().getFechaTarea();
+                        System.out.println("SALIO ACA");
+                            System.out.println("DIA "+fech.getDate());
+                            System.out.println("MES  "+fech.getMonth());
+                            System.out.println("AÑO "+fech.getYear());
+                        }
+                        
                     DatosTareas dt=new DatosTareas(calenda.getTareasInformativas().get(i));
                     System.out.println("ENTRO A ESTE IF 4444444444444 DEL FOR");
                 } else {
-                    Informacion in = new Informacion(fechac, this);
+                    if(ban<1){
+                        ban++;
+                        
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~ CREO UNO NUEVO ACA ~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        Informacion in = new Informacion(fechac, this);
+                    }
                 }
             }
         }
@@ -185,6 +213,7 @@ public class Calendario extends JFrame {
                     DatosTareas dt=new DatosTareas(calenda.getTareasColaborativas().get(i));
                     System.out.println("ENTRO A ESTE IF 4444444444444 DEL FOR");
                 } else {
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~ NUEVO UNO CREO ~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     Informacion in = new Informacion(fechac, this);
                 }
             }
