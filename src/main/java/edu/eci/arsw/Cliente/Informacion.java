@@ -6,6 +6,7 @@
 package edu.eci.arsw.Cliente;
 
 import edu.eci.arsw.CalendarioComun.CalendarioCaptureException;
+import edu.eci.arsw.CalendarioComun.CalendarioCaptureStub;
 import edu.eci.arsw.CalendarioComun.Fecha;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
 import edu.eci.arsw.CalendarioComun.TInformativa;
@@ -21,6 +22,7 @@ public class Informacion extends javax.swing.JFrame {
     static TInformativa infor;
     static Calendario c;
     static TColaborativa colab;
+    static CalendarioCaptureStub cs;
    
     public Informacion() {
         initComponents();
@@ -29,6 +31,7 @@ public class Informacion extends javax.swing.JFrame {
     Informacion(Fecha cl,Calendario c) {
         fecha=cl;
         this.c=c;
+        cs=c.getStub();
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);

@@ -253,6 +253,11 @@ public class Calendario extends JFrame {
         calenda.agregarTareaColaborativa(tc);
     }
 
+    public CalendarioCaptureStub getStub()
+    {
+    return calendarioCaptureStub;
+    }
+    
     public void continuarTI(TInformativa inform) throws CalendarioCaptureException, RemoteException {
         infor = inform;
         System.out.println("Traer Nombre: " + inform.getNombre());

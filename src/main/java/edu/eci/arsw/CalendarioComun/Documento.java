@@ -80,7 +80,7 @@ public class Documento implements Serializable{
         });
        
          System.out.println("Hello afuera "+estado);
-    while(estado==true){
+    while(jf.isActive()){
       palabras = calendarioCaptureStub.getTexto();
     System.out.println("Hello "+estado);
       setTexto(palabras);  
@@ -88,7 +88,6 @@ public class Documento implements Serializable{
     }
       
     }
-
 
     
     public static void setTexto(String texto) throws BadLocationException, CalendarioCaptureException
