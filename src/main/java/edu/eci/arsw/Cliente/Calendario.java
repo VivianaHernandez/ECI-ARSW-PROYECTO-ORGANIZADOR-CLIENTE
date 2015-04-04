@@ -12,6 +12,8 @@ import edu.eci.arsw.CalendarioComun.Documento;
 import edu.eci.arsw.CalendarioComun.Fecha;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
 import edu.eci.arsw.CalendarioComun.TInformativa;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -20,9 +22,12 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.text.BadLocationException;
+import javazoom.jl.decoder.JavaLayerException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -138,7 +143,15 @@ public class Calendario extends JFrame {
         fechac = new Fecha(dia, mes, año);
         calendario.setVisible(false);
         
-        validarSiExisteTarea(fechac);
+        try {
+            validarSiExisteTarea(fechac);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JavaLayerException ex) {
+            Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
        
 
@@ -159,7 +172,7 @@ public class Calendario extends JFrame {
         calendario.setResizable(false);
     }
     
-    public void validarSiExisteTarea(Fecha fechac)
+    public void validarSiExisteTarea(Fecha fechac) throws MalformedURLException, FileNotFoundException, JavaLayerException
     {
         int ban=0;
          tam=tam+ti.size()+tc.size();
@@ -187,13 +200,15 @@ public class Calendario extends JFrame {
                             System.out.println("PASO ACA");
                             
                             Date fech=ti.get(i).getAlarma().getFechaTarea();
-                        System.out.println("SALIO ACA");
+                            System.out.println("ACRIVA LA ALARMA ");
+                            ti.get(i).getAlarma().activar();
                             System.out.println("DIA "+fech.getDate());
                             System.out.println("MES  "+fech.getMonth());
                             System.out.println("AÑO "+fech.getYear());
                         }
                         
                     DatosTareas dt=new DatosTareas(calenda.getTareasInformativas().get(i));
+                    ban++;
                     System.out.println("ENTRO A ESTE IF 4444444444444 DEL FOR");
                 } else {
                     if(ban<1){
