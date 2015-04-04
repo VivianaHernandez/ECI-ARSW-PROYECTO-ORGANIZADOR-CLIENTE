@@ -24,6 +24,7 @@ public class DatosTareas extends javax.swing.JFrame {
     private TColaborativa tc;
     private TInformativa ti;
     private Documento doc;
+    private Calendario c;
     
     public DatosTareas() {
         initComponents();
@@ -35,8 +36,10 @@ public class DatosTareas extends javax.swing.JFrame {
         
     }
 
-    DatosTareas(TColaborativa tc) {
+    DatosTareas(TColaborativa tc,Calendario c) {
+        this.c=c;
         initComponents();
+        
          setVisible(true);
         setLocationRelativeTo(null);
         setSize(415, 415);
@@ -53,7 +56,8 @@ public class DatosTareas extends javax.swing.JFrame {
         
     }
 
-    DatosTareas(TInformativa ti) {
+    DatosTareas(TInformativa ti,Calendario c) {
+        this.c=c;
         initComponents();
         
          setVisible(true);
@@ -247,11 +251,13 @@ public class DatosTareas extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        EdicionCalendario ec; 
         if("Colaborativa".equals(tipo.getText())){
-        ec=new EdicionCalendario(tc);
+        ec=new EdicionCalendario(tc,c);
         }
          if("Informativa".equals(tipo.getText())){
-        ec=new EdicionCalendario(ti);
+        ec=new EdicionCalendario(ti,c);
         }
+         this.setVisible(false);
+         c.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

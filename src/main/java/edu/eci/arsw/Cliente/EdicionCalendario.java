@@ -22,15 +22,17 @@ public class EdicionCalendario extends javax.swing.JFrame {
     static TInformativa infor;
     static TColaborativa colab;
     static String tipo;
+    public Calendario c;
     static CalendarioCaptureStub cs;
 
     public EdicionCalendario() {
         initComponents();
     }
 
-    EdicionCalendario(TColaborativa colab) {
+    EdicionCalendario(TColaborativa colab,Calendario c) {
         this.colab = colab;
-        cs=Informacion.cs;
+        this.c=c;
+        cs=c.getStub();
         tipo = "Colaborativa";
         initComponents();
         this.setVisible(true);
@@ -38,10 +40,10 @@ public class EdicionCalendario extends javax.swing.JFrame {
         this.setResizable(false);
     }
 
-    EdicionCalendario(TInformativa infor) {
-
+    EdicionCalendario(TInformativa infor,Calendario c) {
+          this.c=c;
         this.infor = infor;
-        cs=Informacion.cs;
+        cs=c.getStub();
         tipo = "Informativa";
         initComponents();
         this.setVisible(true);
@@ -209,6 +211,8 @@ public class EdicionCalendario extends javax.swing.JFrame {
             }
             System.out.println("aqui +" +infor.getNombre());
         }
+       this.setVisible(false);
+       c.setVisible(true);
     }//GEN-LAST:event_informativaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -207,7 +207,7 @@ public static void main(String args[]) throws CalendarioCaptureException, Remote
                             System.out.println("AÑO "+fech.getYear());
                         }
                         
-                    DatosTareas dt=new DatosTareas(calenda.getTareasInformativas().get(i));
+                    DatosTareas dt=new DatosTareas(calenda.getTareasInformativas().get(i),this);
                     ban++;
                     System.out.println("ENTRO A ESTE IF 4444444444444 DEL FOR");
                 } else {
@@ -225,7 +225,7 @@ public static void main(String args[]) throws CalendarioCaptureException, Remote
                 System.out.println("444444444422QUE TRAE FECHA EN INFORMATIVA"+calenda.getTareasColaborativas().get(i).getFecha().getDia());
                 if (tc.get(i).getFecha().getDia()==fechac.getDia()&& tc.get(i).getFecha().getAnio()==fechac.getAnio()&& tc.get(i).getFecha().getMes()==fechac.getMes()) {
                     
-                    DatosTareas dt=new DatosTareas(calenda.getTareasColaborativas().get(i));
+                    DatosTareas dt=new DatosTareas(calenda.getTareasColaborativas().get(i),this);
                     System.out.println("ENTRO A ESTE IF 4444444444444 DEL FOR");
                 } else {
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~ NUEVO UNO CREO ~~~~~~~~~~~~~~~~~~~~~~~~~~");

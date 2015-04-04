@@ -193,6 +193,8 @@ public class Informacion extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
         }
+         this.setVisible(false);
+         c.setVisible(true);
     }//GEN-LAST:event_informativaActionPerformed
 
     
@@ -210,6 +212,8 @@ public class Informacion extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.setVisible(false);
+        c.setVisible(true);
     }//GEN-LAST:event_colaborativaActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

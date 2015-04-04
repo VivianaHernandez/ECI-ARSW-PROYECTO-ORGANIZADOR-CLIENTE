@@ -8,7 +8,7 @@
   
       
     <bean id="calendarioCaptureStub" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
-        <property name="serviceUrl" value="rmi://192.168.0.4:3010/calendarioCaptureStub"/>
+        <property name="serviceUrl" value="rmi://192.168.0.9:3010/calendarioCaptureStub"/>
         <property name="serviceInterface" value="edu.eci.arsw.CalendarioComun.CalendarioCaptureStub"/>
     </bean>
 </beans>
