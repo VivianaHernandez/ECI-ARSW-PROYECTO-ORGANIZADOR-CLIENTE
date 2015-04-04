@@ -18,4 +18,7 @@ public interface CalendarioCaptureStub
   
   public ArrayList<TColaborativa> getTareaColaborativa()throws CalendarioCaptureException,RemoteException;
   public ArrayList<TInformativa> getTareaInformativa()throws CalendarioCaptureException,RemoteException;
+  
+   public void notificarCambio(boolean cambio) throws CalendarioCaptureException;
+    public boolean estadoCambio() throws CalendarioCaptureException;
 }
