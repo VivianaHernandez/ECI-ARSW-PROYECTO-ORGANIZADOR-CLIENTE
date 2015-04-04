@@ -55,6 +55,7 @@ public class DatosTareas extends javax.swing.JFrame {
 
     DatosTareas(TInformativa ti) {
         initComponents();
+        
          setVisible(true);
         setLocationRelativeTo(null);
         setSize(415, 415);
