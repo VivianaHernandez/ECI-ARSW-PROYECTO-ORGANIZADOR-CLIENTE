@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import java.applet.AudioClip;
 /**
  *
  * @author Torres
@@ -19,6 +19,7 @@ public class Alarma implements Serializable{
 
     private Date fechaTarea;
     private boolean activo;
+    
 
     public Alarma(Date fechaTarea) {
         this.fechaTarea = fechaTarea;
@@ -38,27 +39,23 @@ public class Alarma implements Serializable{
     }
 
     public void activar() {
-        Date fechaSis = new Date();
-        JFrame jf=new JFrame();
-        System.out.println("que sale en fecha"+fechaSis.compareTo(fechaTarea) );
-        if (fechaSis.compareTo(fechaTarea) >= 0 ) {
+        
             if (!activo) {
                 activo = true;
-                String[] options = {"Posponer", "Desactivar"};
-                int seleccion = JOptionPane.showOptionDialog(null, "Es necesario que seleccione una opcion", "Titulo", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-                System.out.println("QUE SALE "+seleccion);
-                Toolkit.getDefaultToolkit().beep();
+                AudioClip sonido;
+                sonido  = java.applet.Applet.newAudioClip(this.getClass().getResource("C:\\Users\\Torres\\Downloads\\miverdad.wav"));
+                sonido.play();
+                String[] options = {"Desactivar"};
                 
-                if(seleccion==1){
+                int seleccion = JOptionPane.showOptionDialog(null, "La alarma está sonando ¿desea desactivarla?", "La alarma está sonando", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                
+                System.out.println("QUE SALE "+seleccion);
+                
+                if(seleccion==0){
                     desactivar();
-                }else{
-                    Date nuevaF= new Date();
-                    nuevaF.setMinutes(nuevaF.getMinutes()+10);
-                    this.setFechaTarea(nuevaF);
-                    System.out.println("LA FECHA DESPUES ES :"+nuevaF);
                 }
             }
-        }
+        
     }
 
     /*public static void main(String[] args) {
