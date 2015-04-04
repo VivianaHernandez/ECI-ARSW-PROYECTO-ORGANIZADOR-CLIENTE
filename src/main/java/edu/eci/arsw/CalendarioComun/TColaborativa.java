@@ -49,6 +49,7 @@ public class TColaborativa implements Serializable{
     
       public void setDoc(Documento doc) {
         this.doc = doc;
+        System.out.println("llego doc");
     }
 
     public Documento getDoc() {
