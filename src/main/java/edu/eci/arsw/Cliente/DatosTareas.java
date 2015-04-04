@@ -23,6 +23,8 @@ import java.util.logging.Logger;
 public class DatosTareas extends javax.swing.JFrame {
     private TColaborativa tc;
     private TInformativa ti;
+    private Documento doc;
+    
     public DatosTareas() {
         initComponents();
         setVisible(true);
@@ -46,6 +48,9 @@ public class DatosTareas extends javax.swing.JFrame {
         dia.setText(tc.getFecha().getDia()+"");
         mes.setText(tc.getFecha().getMes()+"");
         anio.setText(tc.getFecha().getAnio()+"");
+        tc.getDoc().setVisibles(true);
+          //doc.setVisibles(true);
+        
     }
 
     DatosTareas(TInformativa ti) {
@@ -62,6 +67,8 @@ public class DatosTareas extends javax.swing.JFrame {
         mes.setText(ti.getFecha().getMes()+"");
         anio.setText(ti.getFecha().getAnio()+"");
         setVisible(true);
+        
+       
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -237,9 +244,9 @@ public class DatosTareas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         if(tipo.getText()=="Colaborativa"){
-            Documento doc=tc.getDoc();
-            //doc.setVisible(true);
+        
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
