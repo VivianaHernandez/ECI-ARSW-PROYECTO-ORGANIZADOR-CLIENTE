@@ -16,6 +16,9 @@ public interface CalendarioCaptureStub
   public void enviarTareaInformativa(TInformativa ti) throws CalendarioCaptureException,RemoteException;
   public void enviarTareaColaborativa(TColaborativa tc) throws CalendarioCaptureException,RemoteException;
   
+  public void ModificarDatosTareaI(TInformativa ti)throws CalendarioCaptureException,RemoteException;
+  public void ModificarDatosTareaC(TColaborativa tc)throws CalendarioCaptureException,RemoteException;
+  
   public ArrayList<TColaborativa> getTareaColaborativa()throws CalendarioCaptureException,RemoteException;
   public ArrayList<TInformativa> getTareaInformativa()throws CalendarioCaptureException,RemoteException;
   
