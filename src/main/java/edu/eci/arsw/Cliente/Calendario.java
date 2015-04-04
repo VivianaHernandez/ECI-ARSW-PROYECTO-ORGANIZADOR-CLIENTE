@@ -40,7 +40,7 @@ public class Calendario extends JFrame {
     static TInformativa infor;
     private Fecha fechac;
     static CalendarioCaptureStub calendarioCaptureStub;
-    static Documento d;
+    public Documento d;
     static Informacion vp;
     static CalendarioL calenda=new CalendarioL();
     static Alarma alarma;

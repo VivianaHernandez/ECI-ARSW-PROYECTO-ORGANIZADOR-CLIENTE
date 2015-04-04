@@ -212,6 +212,7 @@ public class EdicionCalendario extends javax.swing.JFrame {
             System.out.println("aqui +" +infor.getNombre());
         }
        this.setVisible(false);
+       
        c.setVisible(true);
     }//GEN-LAST:event_informativaActionPerformed
 
