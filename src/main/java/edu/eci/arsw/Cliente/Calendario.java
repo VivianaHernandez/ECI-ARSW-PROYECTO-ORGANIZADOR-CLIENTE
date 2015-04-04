@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -157,8 +158,7 @@ public class Calendario extends JFrame {
 
         System.out.println("VOLVIO A CALENDARIO");
     }//GEN-LAST:event_seleccionarActionPerformed
-
-    public static void main(String args[]) throws CalendarioCaptureException, RemoteException {
+public static void main(String args[]) throws CalendarioCaptureException, RemoteException {
 
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         calendarioCaptureStub = (CalendarioCaptureStub) ac.getBean("calendarioCaptureStub");
