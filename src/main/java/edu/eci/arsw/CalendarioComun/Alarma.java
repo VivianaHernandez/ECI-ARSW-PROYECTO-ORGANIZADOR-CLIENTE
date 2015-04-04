@@ -11,6 +11,11 @@ import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.applet.AudioClip;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 /**
  *
  * @author Torres
@@ -38,23 +43,28 @@ public class Alarma implements Serializable{
         return fechaTarea;
     }
 
-    public void activar() {
+    public void activar() throws FileNotFoundException, JavaLayerException {
         
-            if (!activo) {
-                activo = true;
-                AudioClip sonido;
-                sonido  = java.applet.Applet.newAudioClip(this.getClass().getResource("C:\\Users\\Torres\\Downloads\\miverdad.wav"));
-                sonido.play();
-                String[] options = {"Desactivar"};
-                
-                int seleccion = JOptionPane.showOptionDialog(null, "La alarma está sonando ¿desea desactivarla?", "La alarma está sonando", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-                
-                System.out.println("QUE SALE "+seleccion);
-                
-                if(seleccion==0){
-                    desactivar();
-                }
+          if (!activo) {
+            activo = true;
+            AudioClip sonido;
+            FileInputStream fis;
+            Player player;
+            //fis = new FileInputStream("C:\\Users\\Torres\\Music\\Songr\\miverdad.mp3");
+            fis = new FileInputStream("C:\\Users\\Torres\\Music\\Songr\\miverdad.mp3");
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            player = new Player(bis);
+            player.play();
+            String[] options = {"Desactivar"};
+
+            int seleccion = JOptionPane.showOptionDialog(null, "La alarma está sonando ¿desea desactivarla?", "La alarma está sonando", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+            System.out.println("QUE SALE " + seleccion);
+
+            if (seleccion == 0) {
+                desactivar();
             }
+        }
         
     }
 
