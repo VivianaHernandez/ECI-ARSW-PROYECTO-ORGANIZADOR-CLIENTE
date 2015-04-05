@@ -145,12 +145,17 @@ public class Calendario extends JFrame {
         calendario.setVisible(false);
         
         try {
+            verTareas();
             validarSiExisteTarea(fechac);
         } catch (MalformedURLException ex) {
             Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JavaLayerException ex) {
+            Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (CalendarioCaptureException ex) {
+            Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
             Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
