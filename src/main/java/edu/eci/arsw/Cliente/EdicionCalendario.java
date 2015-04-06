@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.eci.arsw.Cliente;
 
 import edu.eci.arsw.CalendarioComun.CalendarioCaptureException;
 import edu.eci.arsw.CalendarioComun.CalendarioCaptureStub;
-import edu.eci.arsw.CalendarioComun.Fecha;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
 import edu.eci.arsw.CalendarioComun.TInformativa;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.text.BadLocationException;
 
 public class EdicionCalendario extends javax.swing.JFrame {
 
@@ -41,7 +34,7 @@ public class EdicionCalendario extends javax.swing.JFrame {
     }
 
     EdicionCalendario(TInformativa infor,Calendario c) {
-          this.c=c;
+        this.c=c;
         this.infor = infor;
         cs=c.getStub();
         tipo = "Informativa";
@@ -143,7 +136,7 @@ public class EdicionCalendario extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(informativa, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(248, 248, 248))
+                .addGap(217, 217, 217))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,9 +152,9 @@ public class EdicionCalendario extends javax.swing.JFrame {
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3))
                     .addComponent(descripcionOK))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(informativa, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -178,8 +171,6 @@ public class EdicionCalendario extends javax.swing.JFrame {
 
     private void nombreOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreOkActionPerformed
         nombre = jTextField1.getText();
-        System.out.println("soloNombre +" +infor.getNombre());
-        System.out.println("nombre +" +nombre);
     }//GEN-LAST:event_nombreOkActionPerformed
 
     private void descripcionOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionOKActionPerformed
@@ -193,9 +184,7 @@ public class EdicionCalendario extends javax.swing.JFrame {
             colab.setDesripcion(descripcion);
             try {
                 cs.enviarTareaColaborativa(colab);
-            } catch (CalendarioCaptureException ex) {
-                Logger.getLogger(EdicionCalendario.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (RemoteException ex) {
+            } catch (CalendarioCaptureException | RemoteException ex) {
                 Logger.getLogger(EdicionCalendario.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -204,15 +193,11 @@ public class EdicionCalendario extends javax.swing.JFrame {
             infor.setDescripcion(descripcion);
             try {
                 cs.enviarTareaInformativa(infor);
-            } catch (CalendarioCaptureException ex) {
-                Logger.getLogger(EdicionCalendario.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (RemoteException ex) {
+            } catch (CalendarioCaptureException | RemoteException ex) {
                 Logger.getLogger(EdicionCalendario.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("aqui +" +infor.getNombre());
         }
        this.setVisible(false);
-       
        c.setVisible(true);
     }//GEN-LAST:event_informativaActionPerformed
 

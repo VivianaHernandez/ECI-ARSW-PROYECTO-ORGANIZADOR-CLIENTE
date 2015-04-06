@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.eci.arsw.Cliente;
 
 import edu.eci.arsw.CalendarioComun.CalendarioCaptureException;
@@ -204,9 +199,7 @@ public class Informacion extends javax.swing.JFrame {
             try {
                 System.out.println("llego aqui........................");
                 c.continuarTC(colab);
-            } catch (CalendarioCaptureException ex) {
-                Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (BadLocationException ex) {
+            } catch (CalendarioCaptureException | BadLocationException ex) {
                 Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (RemoteException ex) {

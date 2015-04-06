@@ -62,9 +62,9 @@ public final class Documento extends javax.swing.JFrame implements Serializable{
         this.setVisible(true);
         }
     
-    public void setVisibles()
+    public void setVisibles(boolean est)
     {
-    this.setVisible(true);
+    this.setVisible(est);
     }
 
     public void setTexto(String texto) throws BadLocationException, CalendarioCaptureException {
