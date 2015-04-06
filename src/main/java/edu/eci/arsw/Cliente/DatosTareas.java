@@ -34,14 +34,14 @@ public class DatosTareas extends javax.swing.JFrame {
         mes.setText(tc.getFecha().getMes()+"");
         anio.setText(tc.getFecha().getAnio()+"");
         //tc.getDoc().setVisible(true);
-          //doc.setVisibles(true);
+        //doc.setVisibles(true);
     }
 
     DatosTareas(TInformativa ti,Calendario c) {
         this.c=c;
         initComponents();
         
-         setVisible(true);
+        setVisible(true);
         setLocationRelativeTo(null);
         setSize(415, 415);
         setResizable(false);
@@ -53,7 +53,6 @@ public class DatosTareas extends javax.swing.JFrame {
         mes.setText(ti.getFecha().getMes()+"");
         anio.setText(ti.getFecha().getAnio()+"");
         setVisible(true);
-        
     }
     
     @SuppressWarnings("unchecked")
