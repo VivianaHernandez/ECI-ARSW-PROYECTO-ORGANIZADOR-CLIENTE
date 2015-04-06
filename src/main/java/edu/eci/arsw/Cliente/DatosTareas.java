@@ -51,7 +51,7 @@ public class DatosTareas extends javax.swing.JFrame {
         dia.setText(tc.getFecha().getDia()+"");
         mes.setText(tc.getFecha().getMes()+"");
         anio.setText(tc.getFecha().getAnio()+"");
-        tc.getDoc().setVisibles(true);
+        tc.getDoc().setVisible(true);
           //doc.setVisibles(true);
         
     }

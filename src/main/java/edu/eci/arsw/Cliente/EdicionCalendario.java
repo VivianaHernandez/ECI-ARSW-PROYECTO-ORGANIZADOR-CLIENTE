@@ -178,8 +178,8 @@ public class EdicionCalendario extends javax.swing.JFrame {
 
     private void nombreOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreOkActionPerformed
         nombre = jTextField1.getText();
-        
-        
+        System.out.println("soloNombre +" +infor.getNombre());
+        System.out.println("nombre +" +nombre);
     }//GEN-LAST:event_nombreOkActionPerformed
 
     private void descripcionOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionOKActionPerformed
@@ -209,7 +209,7 @@ public class EdicionCalendario extends javax.swing.JFrame {
             } catch (RemoteException ex) {
                 Logger.getLogger(EdicionCalendario.class.getName()).log(Level.SEVERE, null, ex);
             }
-          
+            System.out.println("aqui +" +infor.getNombre());
         }
        this.setVisible(false);
        
