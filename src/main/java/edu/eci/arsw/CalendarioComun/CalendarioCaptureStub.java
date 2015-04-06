@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.eci.arsw.CalendarioComun;
 
 import java.rmi.RemoteException;
@@ -22,6 +17,6 @@ public interface CalendarioCaptureStub
   public ArrayList<TColaborativa> getTareaColaborativa()throws CalendarioCaptureException,RemoteException;
   public ArrayList<TInformativa> getTareaInformativa()throws CalendarioCaptureException,RemoteException;
   
-   public void notificarCambio(boolean cambio) throws CalendarioCaptureException;
-    public boolean estadoCambio() throws CalendarioCaptureException;
+  public void notificarCambio(boolean cambio) throws CalendarioCaptureException;
+  public boolean estadoCambio() throws CalendarioCaptureException;
 }

@@ -7,12 +7,8 @@ package edu.eci.arsw.CalendarioComun;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Torres
- */
 public class Fecha implements Serializable{
-     private int dia;
+    private int dia;
     private int mes; 
     private int anio;
 
@@ -21,7 +17,6 @@ public class Fecha implements Serializable{
         this.anio=anio;
         this.mes=mes;
     }
-    
     
     public int getDia() {
         return dia;
