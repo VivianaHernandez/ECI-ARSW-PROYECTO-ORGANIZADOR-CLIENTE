@@ -26,14 +26,14 @@ public class CalendarioL {
 
     public void agregarTareaInformativa(TInformativa ti) {
         if (!tareasInformativas.contains(ti)) {
-            System.out.println("Suma al array i +++++++++++++++++++");
+          
             tareasInformativas.add(ti);
         }
     }
 
     public void agregarTareaColaborativa(TColaborativa tc) {
         if (!tareasColaborativas.contains(tc)) {
-            System.out.println("Suma al array c +++++++++++++++++");
+        
             tareasColaborativas.add(tc);
         }
     }
