@@ -131,7 +131,7 @@ public class Calendario extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
-int mes = fecha.getCalendar().get(Calendar.MONTH) + 1;
+        int mes = fecha.getCalendar().get(Calendar.MONTH) + 1;
         int año = fecha.getCalendar().get(Calendar.YEAR);
         int dia = fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
         date = new Date(año, mes, dia);
@@ -140,7 +140,7 @@ int mes = fecha.getCalendar().get(Calendar.MONTH) + 1;
         int df = fechaActual.compareTo(date);
 
         if (df == -1 || df == 0) {
-            fechac = new Fecha(año, mes, dia);
+            fechac = new Fecha(dia, mes, año);
             calendario.setVisible(false);
             try {
                 verTareas();

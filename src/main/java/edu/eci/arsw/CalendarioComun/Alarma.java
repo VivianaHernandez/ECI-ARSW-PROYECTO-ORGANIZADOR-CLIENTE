@@ -40,7 +40,8 @@ public class Alarma implements Serializable{
             AudioClip sonido;
             FileInputStream fis;
             Player player;
-            fis = new FileInputStream("C:\\Users\\Viviana\\Documents\\miverdad.mp3");
+            System.out.println("paso por qui......................");
+            fis = new FileInputStream("/home/local/LABINFO/2085941/Documents/miverdad.mp3");
             BufferedInputStream bis = new BufferedInputStream(fis);
             player = new Player(bis);
             player.play();

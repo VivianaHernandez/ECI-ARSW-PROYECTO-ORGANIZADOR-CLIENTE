@@ -3,22 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.Cliente;
+package edu.eci.arsw.CalendarioComun;
 
 import edu.eci.arsw.CalendarioComun.CalendarioCaptureException;
 import edu.eci.arsw.CalendarioComun.CalendarioCaptureStub;
 import edu.eci.arsw.CalendarioComun.Fecha;
 import edu.eci.arsw.CalendarioComun.TColaborativa;
 import edu.eci.arsw.CalendarioComun.TInformativa;
-import static edu.eci.arsw.Cliente.Informacion.c;
+import edu.eci.arsw.Cliente.Calendario;
 import java.rmi.RemoteException;
 import javax.swing.text.BadLocationException;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
+
 
 /**
  *
