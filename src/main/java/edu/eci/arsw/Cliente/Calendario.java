@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 import javazoom.jl.decoder.JavaLayerException;
 import org.springframework.context.ApplicationContext;
@@ -130,19 +131,26 @@ public class Calendario extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
-
-        int mes = fecha.getCalendar().get(Calendar.MONTH) + 1;
+int mes = fecha.getCalendar().get(Calendar.MONTH) + 1;
         int año = fecha.getCalendar().get(Calendar.YEAR);
         int dia = fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
         date = new Date(año, mes, dia);
-        fechac = new Fecha(dia, mes, año);
-        calendario.setVisible(false);
+        Calendar k = Calendar.getInstance();
+        Date fechaActual = new Date(k.get(Calendar.YEAR), k.get(Calendar.MONTH) + 1, k.get(Calendar.DAY_OF_MONTH));
+        int df = fechaActual.compareTo(date);
 
-        try {
-            verTareas();
-            validarSiExisteTarea(fechac);
-        } catch (MalformedURLException | FileNotFoundException | JavaLayerException | CalendarioCaptureException | RemoteException ex) {
-            Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
+        if (df == -1 || df == 0) {
+            fechac = new Fecha(año, mes, dia);
+            calendario.setVisible(false);
+            try {
+                verTareas();
+                validarSiExisteTarea(fechac);
+            } catch (MalformedURLException | FileNotFoundException | JavaLayerException | CalendarioCaptureException | RemoteException ex) {
+                Logger.getLogger(Calendario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (df == 1) {
+            JOptionPane.showMessageDialog(null, "Esta fecha ya paso");
         }
     }//GEN-LAST:event_seleccionarActionPerformed
 
